@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.MainTemplate {
+    display: flex;
+    box-sizing: border-box;
+}
+.MainContent {
+    margin-left: 15%;
+}
+
+.LoginTemplate {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-left: 15%;
+}
