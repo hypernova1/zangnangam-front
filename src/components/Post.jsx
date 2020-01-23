@@ -2,7 +2,7 @@ import React from 'react';
 
 const Post = () => {
   return (
-    <div>a</div>
+    <div>Post</div>
   );
 };
 

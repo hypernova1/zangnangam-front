@@ -24,5 +24,6 @@ module.exports = {
   rules: {
     "no-console": 0,
     "arrow-body-style": 0,
+    "react/jsx-filename-extension": 0,
   },
 };
