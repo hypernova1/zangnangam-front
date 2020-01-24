@@ -13,11 +13,13 @@ const Login = ({ loginThunk, isAuthenticated }) => {
   const history = useHistory();
   const location = useLocation();
 
-  const { from } = location.state || { form: {pathname: '/'} };
+  const { from } = location.state || { form: { pathname: '/' } };
 
   useEffect(() => {
-    console.log(form.email);
-  }, [form]);
+    if (isAuthenticated) {
+      history.push('/');
+    }
+  }, [isAuthenticated]);
   const updateField = (e) => {
     setForm({
       ...form,
