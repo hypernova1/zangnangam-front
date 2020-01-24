@@ -5,3 +5,7 @@ export const login = (email, password) => {
     email, password,
   });
 };
+
+export const getCategories = () => {
+  return axios.get('http://localhost:3300/category');
+};

@@ -1,25 +1,26 @@
 .MenuBar {
     display: flex;
     flex-direction: column;
-    width: 15%;
+    width: 18rem;
     height: 100%;
     position: fixed;
-    background-color: green;
+    background-color: #2f3640;
 }
 
 .logo {
     font-size: 1.2rem;
-    margin: 20px;
+    margin: 2rem 2rem 3rem 2rem;
     text-decoration: none;
-    color: black;
+    color: white;
+    text-align: center;
 
 }
 
 .link {
     display: block;
     text-decoration: none;
-    color: black;
-    margin: 10px 0 10px 10px;
+    color: #f5f6fa;
+    margin: 1rem 0 1rem 1rem;
 }
 
 .is-active {

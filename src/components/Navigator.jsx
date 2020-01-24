@@ -1,19 +1,38 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Navigator.css';
-import { NavLink, Switch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { getCategories } from '../api';
 
 const Navigator = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCategories()
+      .then(res => res.data)
+      .then(data => {
+        setCategories(data);
+      });
+    console.log(categories);
+  }, [categories.length]);
+
   return (
     <aside className="MenuBar">
       <NavLink exact to="/" className="logo">ZangNanGam</NavLink>
       <nav>
         <ul>
-          <li>
-            <NavLink to="/best" className="link" activeClassName="is-active">인기글</NavLink>
-          </li>
-          <li>
-            <NavLink to="/new" className="link" activeClassName="is-active">최신글</NavLink>
-          </li>
+          {
+            categories.map((category, index) => (
+              <li key={index}>
+                <NavLink
+                  to={`/${category.id}`}
+                  className="link"
+                  activeClassName="is-active"
+                >
+                  {category.name}
+                </NavLink>
+              </li>
+            ))
+          }
         </ul>
       </nav>
     </aside>

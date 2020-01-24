@@ -36,15 +36,25 @@ const Login = ({ loginThunk, isAuthenticated }) => {
   };
   return (
     <div className="LoginTemplate">
-      <label htmlFor="email">
-        Email
-        <input type="text" value={form.email} id="email" onChange={updateField} />
-      </label>
-      <label htmlFor="password">
-        Password
-        <input type="password" value={form.password} id="password" onChange={updateField} />
-      </label>
-      <button type="button" onClick={handleClick}>로그인</button>
+      <div className="LoginInput">
+        <div className="Label">
+            Email
+        </div>
+        <div className="Email">
+          <input type="text" value={form.email} id="email" onChange={updateField} />
+        </div>
+      </div>
+      <div className="LoginInput">
+        <div className="Label">
+          Password
+        </div>
+        <div className="Password">
+          <input type="password" value={form.password} id="password" onChange={updateField} />
+        </div>
+      </div>
+      <div className="LoginBtnWrap">
+        <button type="button" onClick={handleClick}>로그인</button>
+      </div>
     </div>
   );
 };

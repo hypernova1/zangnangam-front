@@ -7,7 +7,7 @@ import { logout } from '../reducers/auth';
 const Header = ({ isAuthenticated, logout }) => {
   return (
     <div className="Header">
-      <h2>Header</h2>
+      <h2 className="BlogName">13년의 간극</h2>
       {
         isAuthenticated ? (
           <button

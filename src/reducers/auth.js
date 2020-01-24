@@ -49,7 +49,7 @@ const initialState = {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case LOGIN_SUCCESS:
       return {
         isAuthenticated: true,
         userInfo: action.payload,
