@@ -1,6 +1,11 @@
 .LoginTemplate {
     height: 100%;
-    margin: 15%;
+    margin: 5% auto;
+    padding: 3rem;
+    width:25rem;
+    border: 1px solid gray;
+    border-radius: 4px;
+    box-shadow: 1px 1px 1px;
 }
 
 .LoginTemplate > div, button {

@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.css';
 import {
-  BrowserRouter as Router, Switch, Route, Link
+  BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 import Header from './Header';
 import Navigator from './Navigator';
 import PrivateRoute from './PrivateRoute';
 
-import BestPost from '../page/BestPost';
-import NewPost from '../page/NewPost';
+import PostList from '../page/PostList';
 
 import Login from '../page/Login';
 
@@ -20,10 +19,12 @@ const App = () => {
       <section className="MainContent">
         <Switch>
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/(|best)">
+          {/*
+          <PrivateRoute path="/:category">
             <BestPost />
           </PrivateRoute>
-          <Route path="/new" component={NewPost} />
+          */}
+          <Route path="/:category" component={PostList}/>
         </Switch>
       </section>
     </Router>

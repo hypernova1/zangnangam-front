@@ -12,7 +12,6 @@ const Navigator = () => {
       .then(data => {
         setCategories(data);
       });
-    console.log(categories);
   }, [categories.length]);
 
   return (
@@ -24,7 +23,7 @@ const Navigator = () => {
             categories.map((category, index) => (
               <li key={index}>
                 <NavLink
-                  to={`/${category.id}`}
+                  to={`/${category.path}`}
                   className="link"
                   activeClassName="is-active"
                 >

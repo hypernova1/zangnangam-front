@@ -9,3 +9,7 @@ export const login = (email, password) => {
 export const getCategories = () => {
   return axios.get('http://localhost:3300/category');
 };
+
+export const getPostList = (category, page) => {
+  return axios.get(`http://localhost:3300/${category}/${page}`);
+};
