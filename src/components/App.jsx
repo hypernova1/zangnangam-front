@@ -8,6 +8,7 @@ import Navigator from './Navigator';
 import PrivateRoute from './PrivateRoute';
 
 import PostList from '../page/PostList';
+import Post from '../page/Post';
 
 import Login from '../page/Login';
 
@@ -24,7 +25,8 @@ const App = () => {
             <BestPost />
           </PrivateRoute>
           */}
-          <Route path="/:category" component={PostList}/>
+          <Route exact path="/:category" component={PostList} />
+          <Route path="/:category/:postId" component={Post} />
         </Switch>
       </section>
     </Router>

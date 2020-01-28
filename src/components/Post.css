@@ -1,0 +1,14 @@
+.PostWrapper {
+    margin: 3rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.PostWrapper .PostTitle {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.PostWrapper .PostWriter {
+    float: right;
+}

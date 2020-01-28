@@ -1,10 +1,17 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import './Post.css';
 
-const Post = () => {
+const Post = ({ item, category }) => {
   return (
-    <div>
-      Hello
-    </div>
+    <article
+      className="PostWrapper"
+    >
+      <NavLink to={`/${category}/${item.id}`} className="PostTitle">
+        { item.title }
+      </NavLink>
+      <div className="PostWriter">{ item.writer.name }</div>
+    </article>
   );
 };
 

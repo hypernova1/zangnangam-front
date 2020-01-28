@@ -13,3 +13,7 @@ export const getCategories = () => {
 export const getPostList = (category, page) => {
   return axios.get(`http://localhost:3300/${category}/${page}`);
 };
+
+export const getPostDetail = (category, postId) => {
+
+};
