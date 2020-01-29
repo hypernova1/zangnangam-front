@@ -8,7 +8,7 @@ import Navigator from './Navigator';
 import PrivateRoute from './PrivateRoute';
 
 import PostList from '../page/PostList';
-import Post from '../page/Post';
+import PostDetail from '../page/PostDetail';
 
 import Login from '../page/Login';
 
@@ -26,7 +26,7 @@ const App = () => {
           </PrivateRoute>
           */}
           <Route exact path="/:category" component={PostList} />
-          <Route path="/:category/:postId" component={Post} />
+          <Route path="/:category/:postId" component={PostDetail} />
         </Switch>
       </section>
     </Router>

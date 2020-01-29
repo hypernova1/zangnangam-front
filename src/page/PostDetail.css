@@ -1,0 +1,12 @@
+.PostDetail {
+    margin: 5% 15% 15%;
+}
+
+.PostDetail .PostHeader {
+    border-bottom: 1px solid #95a5a6;
+}
+
+.PostDetail .PostTitle {
+    padding: 1.2rem;
+    font-size: 2rem;
+}

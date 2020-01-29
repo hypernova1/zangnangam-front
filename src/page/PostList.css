@@ -1,0 +1,13 @@
+.PostList .CategoryName {
+    margin: 2rem;
+    color: #222f3e;
+}
+
+.PostList .MoreView {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    padding: 0.6rem;
+    border: 1px solid #8395a7;
+    cursor: pointer;
+}
