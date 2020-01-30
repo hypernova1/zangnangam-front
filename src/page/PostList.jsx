@@ -51,7 +51,7 @@ const PostList = ({ match }) => {
         ))
       }
       {
-        next ? (
+        next && (
           <div
             className="MoreView"
             onClick={getMorePost}
@@ -60,8 +60,6 @@ const PostList = ({ match }) => {
           >
             더 보기
           </div>
-        ) : (
-          <div>아무 것도 없어용.</div>
         )
       }
 

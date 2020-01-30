@@ -14,3 +14,7 @@
 .PostWrapper .PostWriter {
     float: right;
 }
+
+.PostWrapper .PostWriteDate {
+    color: #7f8c8d;
+}

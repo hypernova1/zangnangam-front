@@ -1,12 +1,59 @@
 .PostDetail {
-    margin: 5% 15% 15%;
+    margin: 3% 15% 15%;
 }
 
 .PostDetail .PostHeader {
-    border-bottom: 1px solid #95a5a6;
+    border-bottom: 1px solid #ecf0f1;
 }
 
 .PostDetail .PostTitle {
-    padding: 1.2rem;
+    padding: 1.2rem 0;
     font-size: 2rem;
+}
+
+.PostDetail .PostBody {
+    margin: 2rem 0;
+}
+
+.PostHeader .PostWriteDate {
+    color: #7f8c8d;
+}
+
+.PostComment .CommentInfo {
+    border-bottom: 1px solid #ecf0f1;
+    padding: 1rem 0 0.5rem;
+    font-size: 0.8rem;
+}
+
+.PostComment .WriteComment {
+    margin: 1rem 0;
+    height: 7rem;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.WriteComment .CommentWriter {
+    display: inline-block;
+    width: 20%;
+}
+
+.WriteComment .InputComment {
+    float: right;
+    display: inline-block;
+    width: 80%;
+}
+
+.InputComment > textarea {
+    float: left;
+    width: 100%;
+    height: 6rem;
+    resize: none;
+}
+
+.WriterId, .WriterPassword {
+    height: 1.5rem;
+    margin-bottom: 0.7rem;
+}
+
+.CommentWrap {
+    list-style: none;
 }

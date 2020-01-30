@@ -28,7 +28,7 @@
     color: red;
 }
 
-ul {
+.CategoryTitles {
     margin: 10px 0 10px 10px;
     list-style: none;
     font-size: 1.3rem;

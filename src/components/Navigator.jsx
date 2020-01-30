@@ -18,7 +18,7 @@ const Navigator = () => {
     <aside className="MenuBar">
       <NavLink exact to="/" className="logo">ZangNanGam</NavLink>
       <nav>
-        <ul>
+        <ul className="CategoryTitles">
           {
             categories.map((category, index) => (
               <li key={index}>

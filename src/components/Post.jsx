@@ -7,10 +7,10 @@ const Post = ({ item, category }) => {
     <article
       className="PostWrapper"
     >
+      <div className="PostWriteDate">{ item.created }</div>
       <NavLink to={`/${category}/${item.id}`} className="PostTitle">
         { item.title }
       </NavLink>
-      <div className="PostWriter">{ item.writer.name }</div>
     </article>
   );
 };

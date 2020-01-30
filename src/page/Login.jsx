@@ -19,7 +19,7 @@ const Login = ({ loginThunk, isAuthenticated }) => {
     if (isAuthenticated) {
       history.push('/');
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, history]);
   const updateField = (e) => {
     setForm({
       ...form,
