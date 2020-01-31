@@ -1,15 +1,22 @@
 .Comment {
+    margin: 1rem;
 }
 
 .Comment .CommentWriter {
-    float: left;
-    width: 15%;
+    display: inline-block;
+    width: 132px;
+    font-weight: bold;
+    vertical-align: top;
 }
 
 .Comment .CommentContent {
+    display: inline-block;
+    width: 70%;
+    word-break: break-all;
 }
 
 .Comment .CommentWriteDate {
+    display: inline-block;
     font-size: 0.8rem;
     float: right;
 }

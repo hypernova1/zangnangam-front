@@ -27,23 +27,22 @@
 
 .PostComment .WriteComment {
     margin: 1rem 0;
-    height: 7rem;
     border-bottom: 1px solid #ecf0f1;
 }
 
 .WriteComment .CommentWriter {
     display: inline-block;
-    width: 20%;
+    width: 12rem;
+    text-align: center;
+    vertical-align: top;
 }
 
 .WriteComment .InputComment {
-    float: right;
     display: inline-block;
-    width: 80%;
+    width: 58rem;
 }
 
 .InputComment > textarea {
-    float: left;
     width: 100%;
     height: 6rem;
     resize: none;
