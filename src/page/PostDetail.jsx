@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { getPostDetail } from '../api';
 import './PostDetail.css';
 import Comment from '../components/Comment';
 
-const PostDetail = ({ match }) => {
+const PostDetail = ({ match, userEmail }) => {
   const { category, postId } = match.params;
   const [post, setPost] = useState({});
+  const [writerEmail, setWriterEmail] = useState('');
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -13,6 +15,7 @@ const PostDetail = ({ match }) => {
       .then(res => res.data)
       .then(data => {
         setPost(data);
+        setWriterEmail(data.writer.email);
         setComments(data.comments);
       });
   }, [postId, category]);
@@ -27,7 +30,15 @@ const PostDetail = ({ match }) => {
       </div>
       <div className="PostComment">
         <div className="CommentInfo">
-          Comment { comments.length }개
+          Comment { comments.length }
+          {
+            userEmail === writerEmail && (
+              <div className="PostButton">
+                <button className="ModifyButton">수정</button>
+                <button className="RemoveButton">삭제</button>
+              </div>
+            )
+          }
         </div>
         <div className="WriteComment">
           <div className="CommentWriter">
@@ -52,4 +63,9 @@ const PostDetail = ({ match }) => {
   );
 };
 
-export default PostDetail;
+const mapStateToProps = (state) => ({
+  userEmail: state.auth.userInfo.email,
+});
+
+
+export default connect(mapStateToProps)(PostDetail);

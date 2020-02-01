@@ -56,3 +56,14 @@
 .CommentWrap {
     list-style: none;
 }
+
+.PostButton {
+    float: right;
+}
+
+.RemoveButton, .ModifyButton {
+    all: unset;
+    padding: 0 0.5rem;
+    cursor: pointer;
+    color: #a4b0be;
+}

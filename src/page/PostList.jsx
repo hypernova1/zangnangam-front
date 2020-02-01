@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import Post from '../components/Post';
 import { getPostList } from '../api';
 import './PostList.css';
 
-const PostList = ({ match }) => {
+const PostList = ({ match, userEmail }) => {
 
   const { category } = match.params;
   const [postList, setPostList] = useState([]);
@@ -40,7 +42,14 @@ const PostList = ({ match }) => {
   };
   return (
     <section className="PostList">
-      <h2 className="CategoryName">{ categoryName }</h2>
+      <div>
+        <div className="ButtonWrap">
+          <button type="button" className="PostWriteButton">
+            <NavLink to={`/write?category=${category}`}>글쓰기</NavLink>
+          </button>
+        </div>
+        <h2 className="CategoryName">{ categoryName }</h2>
+      </div>
       {
         postList.map((item) => (
           <Post
@@ -68,4 +77,8 @@ const PostList = ({ match }) => {
   );
 };
 
-export default PostList;
+const mapStateToProps = (state) => ({
+  userEmail: state.auth.userInfo.email,
+});
+
+export default connect(mapStateToProps)(PostList);

@@ -1,0 +1,32 @@
+.WriteForm {
+    width: 80%;
+    margin: 3rem auto;
+}
+
+.WriteForm .PostTitle {
+    display: inline-block;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    width: 90%;
+    height: 3rem;
+    font-size: 2.5rem;
+}
+
+.WriteForm .ButtonWrap {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.WriteForm .ButtonWrap > button {
+    all: unset;
+    margin: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #718093;
+    border-radius: 3px ;
+    cursor: pointer;
+}
+
+.WriteForm .ButtonWrap > button:hover {
+    background-color: #718093;
+    transition: 0.5s background-color;
+}

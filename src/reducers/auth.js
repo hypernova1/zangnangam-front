@@ -44,7 +44,9 @@ export const loginThunk = (email, password) => (dispatch) => {
 
 const initialState = {
   isAuthenticated: false,
-  userInfo: null,
+  userInfo: {
+    email: '',
+  },
 };
 
 export default function auth(state = initialState, action) {
@@ -52,12 +54,14 @@ export default function auth(state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         isAuthenticated: true,
-        userInfo: action.payload,
+        userInfo: action.payload.userInfo,
       };
     case LOGIN_FAILURE: case LOGOUT:
       return {
         isAuthenticated: false,
-        userInfo: null,
+        userInfo: {
+          email: '',
+        },
       };
     default:
       return state;

@@ -9,6 +9,7 @@ import PrivateRoute from './PrivateRoute';
 
 import PostList from '../page/PostList';
 import PostDetail from '../page/PostDetail';
+import PostWriteForm from '../page/PostWriteForm';
 
 import Login from '../page/Login';
 
@@ -25,6 +26,7 @@ const App = () => {
             <BestPost />
           </PrivateRoute>
           */}
+          <Route exact path="/write" component={PostWriteForm} />
           <Route exact path="/:category" component={PostList} />
           <Route path="/:category/:postId" component={PostDetail} />
         </Switch>
