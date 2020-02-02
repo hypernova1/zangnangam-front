@@ -19,6 +19,10 @@ const PostDetail = ({ match, userEmail }) => {
         setComments(data.comments);
       });
   }, [postId, category]);
+
+  const createMarkUp = () => ({
+    __html: post.content,
+  });
   return (
     <article className="PostDetail">
       <div className="PostHeader">
@@ -26,7 +30,10 @@ const PostDetail = ({ match, userEmail }) => {
         <div className="PostWriteDate">{ post.created }</div>
       </div>
       <div className="PostBody">
-        <div className="PostContent">{post.content}</div>
+        <div
+          className="PostContent"
+          dangerouslySetInnerHTML={createMarkUp()}
+        />
       </div>
       <div className="PostComment">
         <div className="CommentInfo">

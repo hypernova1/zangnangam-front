@@ -27,3 +27,7 @@
     font-weight: bold;
     color: #a4b0be;
 }
+
+.PostList .WriteButton {
+    all: unset;
+}

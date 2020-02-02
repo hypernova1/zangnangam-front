@@ -45,7 +45,12 @@ const PostList = ({ match, userEmail }) => {
       <div>
         <div className="ButtonWrap">
           <button type="button" className="PostWriteButton">
-            <NavLink to={`/write?category=${category}`}>글쓰기</NavLink>
+            <NavLink
+              className="WriteButton"
+              to="/write"
+            >
+              글쓰기
+            </NavLink>
           </button>
         </div>
         <h2 className="CategoryName">{ categoryName }</h2>
