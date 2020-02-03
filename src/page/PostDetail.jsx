@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { getPostDetail } from '../api';
+import { getPostDetail, writeComment } from '../api';
 import './PostDetail.css';
 import Comment from '../components/Comment';
 
@@ -9,6 +9,14 @@ const PostDetail = ({ match, userEmail }) => {
   const [post, setPost] = useState({});
   const [writerEmail, setWriterEmail] = useState('');
   const [comments, setComments] = useState([]);
+  const [commentForm, setCommentForm] = useState({
+    userInfo: {},
+    nonMemberName: '',
+    nonMemberPwd: '',
+    content: '',
+    postId,
+    category,
+  });
 
   useEffect(() => {
     getPostDetail(category, postId)
@@ -18,11 +26,31 @@ const PostDetail = ({ match, userEmail }) => {
         setWriterEmail(data.writer.email);
         setComments(data.comments);
       });
-  }, [postId, category]);
+  }, []);
 
   const createMarkUp = () => ({
     __html: post.content,
   });
+
+  const handleChange = (e) => {
+    setCommentForm({
+      ...commentForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const onClickWriteComment = () => {
+    writeComment(commentForm)
+      .then((res) => res.data)
+      .then((data) => {
+        setComments(data);
+        setCommentForm({
+          ...commentForm,
+          nonMemberName: '',
+          nonMemberPwd: '',
+          content: '',
+        });
+      });
+  };
   return (
     <article className="PostDetail">
       <div className="PostHeader">
@@ -41,25 +69,53 @@ const PostDetail = ({ match, userEmail }) => {
           {
             userEmail === writerEmail && (
               <div className="PostButton">
-                <button className="ModifyButton">수정</button>
-                <button className="RemoveButton">삭제</button>
+                <button type="button" className="ModifyButton">수정</button>
+                <button type="button" className="RemoveButton">삭제</button>
               </div>
             )
           }
         </div>
         <div className="WriteComment">
           <div className="CommentWriter">
-            <input type="text" placeholder="아이디" className="WriterId" />
-            <input type="password" placeholder="비밀번호" className="WriterPassword" />
+            <input
+              type="text"
+              placeholder="이름"
+              className="WriterName"
+              name="nonMemberName"
+              onChange={handleChange}
+              value={commentForm.nonMemberName}
+            />
+            <input
+              type="password"
+              placeholder="비밀번호"
+              className="WriterPassword"
+              name="nonMemberPwd"
+              onChange={handleChange}
+              value={commentForm.nonMemberPwd}
+            />
           </div>
           <div className="InputComment">
-            <textarea />
+            <textarea
+              name="content"
+              onChange={handleChange}
+              value={commentForm.content}
+            />
+          </div>
+          <div className="CommentButtonWrap">
+            <button
+              type="button"
+              className="CommentButton"
+              onClick={onClickWriteComment}
+            >
+              등록
+            </button>
           </div>
         </div>
         <ul className="CommentWrap">
           {
             comments.map((comment) => (
-              <Comment key={comment.id}
+              <Comment
+                key={comment.id}
                 comment={comment}
               />
             ))
