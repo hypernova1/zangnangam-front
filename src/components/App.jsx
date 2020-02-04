@@ -27,6 +27,7 @@ const App = () => {
           </PrivateRoute>
           */}
           <Route exact path="/write" component={PostWriteForm} />
+          <Route exact path="/modify/:category/:postId" component={PostWriteForm} />
           <Route exact path="/:category" component={PostList} />
           <Route path="/:category/:postId" component={PostDetail} />
         </Switch>

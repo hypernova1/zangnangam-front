@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { getPostDetail, writeComment } from '../api';
 import './PostDetail.css';
 import Comment from '../components/Comment';
@@ -69,7 +70,9 @@ const PostDetail = ({ match, userEmail }) => {
           {
             userEmail === writerEmail && (
               <div className="PostButton">
-                <button type="button" className="ModifyButton">수정</button>
+                <button type="button" className="ModifyButton">
+                  <NavLink to={`/modify/${category}/${post.id}`}>수정</NavLink>
+                </button>
                 <button type="button" className="RemoveButton">삭제</button>
               </div>
             )

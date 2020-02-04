@@ -17,3 +17,9 @@ export const writePost = (post) => {
     ...post,
   });
 };
+
+export const modifyPost = (post, postId) => {
+  return axios.put(`http://localhost:3300/post/${postId}`, {
+    ...post,
+  });
+};

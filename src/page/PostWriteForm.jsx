@@ -3,9 +3,10 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './PostWriteForm.css';
-import { getCategories, writePost } from '../api';
+import { getCategories, getPostDetail, writePost, modifyPost } from '../api';
 
-const PostWriteForm = ({ userEmail }) => {
+const PostWriteForm = ({ match, userEmail }) => {
+  const { category, postId } = match.params;
   const [categoryList, setCategoryList] = useState([]);
   const [form, setForm] = useState({
     title: '',
@@ -25,6 +26,17 @@ const PostWriteForm = ({ userEmail }) => {
       .then((res) => res.data)
       .then((data) => {
         setCategoryList(data);
+      });
+    if (!postId) return;
+    getPostDetail(category, postId)
+      .then((res) => res.data)
+      .then((data) => {
+        setForm({
+          ...form,
+          title: data.title,
+          content: data.content,
+          category: data.category.id,
+        });
       });
   }, []);
 
@@ -48,21 +60,30 @@ const PostWriteForm = ({ userEmail }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    writePost(form)
+    let promise;
+    if (postId) {
+      promise = modifyPost(form, postId);
+    } else {
+      promise = writePost(form);
+    }
+    promise
       .then((res) => {
-        console.log(res);
         return res.data;
       })
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+      })
       .catch(() => alert('error'));
   };
 
   return (
     <form className="WriteForm" onSubmit={handleSubmit}>
+      <h2>{ postId ? '수정하기' : '작성하기' }</h2>
       <select
         className="CategorySelect"
         name="category"
         onChange={handleChange}
+        value={form.category.id}
       >
         <option value="">카테고리</option>
         {
@@ -83,6 +104,7 @@ const PostWriteForm = ({ userEmail }) => {
         className="PostTitle"
         placeholder="제목을 입력하세요."
         onChange={handleChange}
+        value={form.title}
         name="title"
       />
       <div className="EditorWrap">
@@ -90,6 +112,7 @@ const PostWriteForm = ({ userEmail }) => {
           apiKey="x2gdmpp1etfrlqthrpd0iwrepqpuocm1jxtvfy74tdrbw8w5"
           cloudChannel="5-stable"
           onChange={handleEditorChange}
+          initialValue={form.content}
           init={{
             menubar: false,
             height: 600,
@@ -103,7 +126,7 @@ const PostWriteForm = ({ userEmail }) => {
         />
       </div>
       <div className="ButtonWrap">
-        <button type="submit">등록</button>
+        <button type="submit">{ postId ? '수정' : '등록' }</button>
         <button type="button" onClick={handleClick}>취소</button>
       </div>
     </form>
