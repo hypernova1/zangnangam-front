@@ -20,7 +20,6 @@
 }
 
 .PostComment {
-    width: 1224px;
 }
 
 .PostComment .CommentInfo {
@@ -33,7 +32,6 @@
     position: relative;
     margin: 1rem 0;
     border-bottom: 1px solid #ecf0f1;
-    left: 1rem;
 }
 
 .WriteComment .CommentWriter {
@@ -45,7 +43,7 @@
 
 .WriteComment .InputComment {
     display: inline-block;
-    width: 50rem;
+    width: 60%;
 }
 
 .InputComment > textarea {

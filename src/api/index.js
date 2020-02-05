@@ -5,5 +5,6 @@ export {
   getPostList,
   writePost,
   modifyPost,
+  removePost,
 } from './post';
 export { writeComment } from './comment';

@@ -3,16 +3,20 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './PostWriteForm.css';
-import { getCategories, getPostDetail, writePost, modifyPost } from '../api';
+import {
+  getCategories,
+  writePost,
+  modifyPost,
+} from '../api';
 
-const PostWriteForm = ({ match, userEmail }) => {
+const PostWriteForm = ({ match, userEmail, post }) => {
   const { category, postId } = match.params;
   const [categoryList, setCategoryList] = useState([]);
   const [form, setForm] = useState({
+    writer: userEmail,
     title: '',
     content: '',
     category: '',
-    writer: userEmail,
   });
   const [valid, setValid] = useState({
     title: false,
@@ -26,16 +30,14 @@ const PostWriteForm = ({ match, userEmail }) => {
       .then((res) => res.data)
       .then((data) => {
         setCategoryList(data);
-      });
-    if (!postId) return;
-    getPostDetail(category, postId)
-      .then((res) => res.data)
-      .then((data) => {
+      })
+      .then(() => {
+        if (!postId) return;
         setForm({
           ...form,
-          title: data.title,
-          content: data.content,
-          category: data.category.id,
+          title: post.title,
+          content: post.content,
+          category: post.category,
         });
       });
   }, []);
@@ -119,7 +121,7 @@ const PostWriteForm = ({ match, userEmail }) => {
             plugins: [
               "advlist autolink lists link image charmap print preview anchor",
               "searchreplace visualblocks code fullscreen",
-              "insertdatetime media table contextmenu paste imagetools wordcount"
+              "insertdatetime media table paste imagetools wordcount"
             ],
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
           }}
@@ -135,6 +137,7 @@ const PostWriteForm = ({ match, userEmail }) => {
 
 const mapStateToProps = (state) => ({
   userEmail: state.auth.userInfo.email,
+  post: state.post.post,
 });
 
 export default connect(mapStateToProps)(PostWriteForm);

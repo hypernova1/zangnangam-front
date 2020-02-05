@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { getPostDetail, writeComment } from '../api';
+import { useHistory } from 'react-router-dom';
+import { getPostDetail, writeComment, removePost } from '../api';
 import './PostDetail.css';
 import Comment from '../components/Comment';
+import { savePost } from '../reducers/post';
 
-const PostDetail = ({ match, userEmail }) => {
+const PostDetail = ({ match, userEmail, savePost }) => {
   const { category, postId } = match.params;
+  const history = useHistory();
   const [post, setPost] = useState({});
   const [writerEmail, setWriterEmail] = useState('');
   const [comments, setComments] = useState([]);
@@ -21,8 +23,8 @@ const PostDetail = ({ match, userEmail }) => {
 
   useEffect(() => {
     getPostDetail(category, postId)
-      .then(res => res.data)
-      .then(data => {
+      .then((res) => res.data)
+      .then((data) => {
         setPost(data);
         setWriterEmail(data.writer.email);
         setComments(data.comments);
@@ -39,6 +41,7 @@ const PostDetail = ({ match, userEmail }) => {
       [e.target.name]: e.target.value,
     });
   };
+
   const onClickWriteComment = () => {
     writeComment(commentForm)
       .then((res) => res.data)
@@ -52,6 +55,24 @@ const PostDetail = ({ match, userEmail }) => {
         });
       });
   };
+
+  const modifyPost = () => {
+    savePost(post);
+    history.push(`/modify/${category}/${post.id}`);
+  };
+
+  const deletePost = () => {
+    // eslint-disable-next-line no-restricted-globals,no-alert
+    const _confirm = confirm('삭제하시겠습니까?');
+    if(!_confirm) return;
+    removePost(postId, category)
+      .then((res) => res.data)
+      .then(() => {
+        history.push(`/${category}`);
+      })
+      .catch((error) => alert(error));
+  };
+
   return (
     <article className="PostDetail">
       <div className="PostHeader">
@@ -66,14 +87,21 @@ const PostDetail = ({ match, userEmail }) => {
       </div>
       <div className="PostComment">
         <div className="CommentInfo">
-          Comment { comments.length }
+          Comment
+          {' '}{ comments.length }
           {
             userEmail === writerEmail && (
               <div className="PostButton">
-                <button type="button" className="ModifyButton">
-                  <NavLink to={`/modify/${category}/${post.id}`}>수정</NavLink>
+                <button type="button" className="ModifyButton" onClick={modifyPost}>
+                  수정
                 </button>
-                <button type="button" className="RemoveButton">삭제</button>
+                <button
+                  type="button"
+                  className="RemoveButton"
+                  onClick={deletePost}
+                >
+                  삭제
+                </button>
               </div>
             )
           }
@@ -133,5 +161,9 @@ const mapStateToProps = (state) => ({
   userEmail: state.auth.userInfo.email,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  savePost: (post) => dispatch(savePost(post)),
+});
 
-export default connect(mapStateToProps)(PostDetail);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

@@ -23,3 +23,11 @@ export const modifyPost = (post, postId) => {
     ...post,
   });
 };
+
+export const removePost = (postId, categoryPath) => {
+  return axios.delete(`http://localhost:3300/post/${postId}`, {
+    params: {
+      categoryPath,
+    },
+  });
+};
