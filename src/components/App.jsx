@@ -7,11 +7,11 @@ import Header from './Header';
 import Navigator from './Navigator';
 import PrivateRoute from './PrivateRoute';
 
+import Main from '../page/Main';
+import Login from '../page/Login';
 import PostList from '../page/PostList';
 import PostDetail from '../page/PostDetail';
 import PostWriteForm from '../page/PostWriteForm';
-
-import Login from '../page/Login';
 
 const App = () => {
   return (
@@ -20,16 +20,18 @@ const App = () => {
       <Header />
       <section className="MainContent">
         <Switch>
+          <Route exact path="/" component={Main} />
           <Route path="/login" component={Login} />
-          {/*
-          <PrivateRoute path="/:category">
-            <BestPost />
-          </PrivateRoute>
-          */}
-          <Route exact path="/write" component={PostWriteForm} />
-          <Route exact path="/modify/:category/:postId" component={PostWriteForm} />
-          <Route exact path="/:category" component={PostList} />
-          <Route path="/:category/:postId" component={PostDetail} />
+          <PrivateRoute
+            path="/write"
+            component={PostWriteForm}
+          />
+          <PrivateRoute
+            path="/:categoryPath/modify/:postId"
+            component={PostWriteForm}
+          />
+          <Route exact path="/:categoryPath" component={PostList} />
+          <Route exact path="/:categoryPath/:postId" component={PostDetail} />
         </Switch>
       </section>
     </Router>

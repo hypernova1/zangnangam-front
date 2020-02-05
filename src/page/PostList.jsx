@@ -5,35 +5,31 @@ import Post from '../components/Post';
 import { getPostList } from '../api';
 import './PostList.css';
 
-const PostList = ({ match, userEmail }) => {
+const PostList = ({ match, isAuthenticated }) => {
 
-  const { category } = match.params;
+  const { categoryPath } = match.params;
   const [postList, setPostList] = useState([]);
   const [categoryName, setCategoryName] = useState('');
   const [next, setNext] = useState(false);
   const pageNo = useRef(1);
 
-  const fetchData = () => {
-    getPostList(category, pageNo.current)
+  useEffect(() => {
+    getPostList(categoryPath, pageNo.current)
       .then((res) => res.data)
       .then((data) => {
         setPostList(data.postList);
         setCategoryName(data.categoryName);
         setNext(data.next);
       });
-  };
-
-  useEffect(() => {
-    fetchData();
     return () => {
       pageNo.current = 1;
       setPostList([]);
     };
-  }, [category]);
+  }, [categoryPath]);
 
   const getMorePost = () => {
     pageNo.current += 1;
-    getPostList(category, pageNo.current)
+    getPostList(categoryPath, pageNo.current)
       .then((res) => res.data)
       .then((data) => {
         setPostList([...postList, ...data.postList]);
@@ -45,12 +41,16 @@ const PostList = ({ match, userEmail }) => {
       <div>
         <div className="ButtonWrap">
           <button type="button" className="PostWriteButton">
-            <NavLink
-              className="WriteButton"
-              to="/write"
-            >
-              글쓰기
-            </NavLink>
+            {
+              isAuthenticated && (
+                <NavLink
+                  className="WriteButton"
+                  to="/write"
+                >
+                  글쓰기
+                </NavLink>
+              )
+            }
           </button>
         </div>
         <h2 className="CategoryName">{ categoryName }</h2>
@@ -58,7 +58,7 @@ const PostList = ({ match, userEmail }) => {
       {
         postList.map((item) => (
           <Post
-            category={category}
+            categoryPath={categoryPath}
             item={item}
             key={item.id}
           />
@@ -84,6 +84,7 @@ const PostList = ({ match, userEmail }) => {
 
 const mapStateToProps = (state) => ({
   userEmail: state.auth.userInfo.email,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(PostList);

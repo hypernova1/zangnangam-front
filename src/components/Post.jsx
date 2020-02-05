@@ -2,13 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Post.css';
 
-const Post = ({ item, category }) => {
+const Post = ({ item, categoryPath }) => {
   return (
     <article
       className="PostWrapper"
     >
       <div className="PostWriteDate">{ item.created }</div>
-      <NavLink to={`/${category}/${item.id}`} className="PostTitle">
+      <NavLink to={`/${categoryPath}/${item.id}`} className="PostTitle">
         { item.title }
       </NavLink>
     </article>

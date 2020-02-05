@@ -10,14 +10,16 @@ import {
 } from '../api';
 
 const PostWriteForm = ({ match, userEmail, post }) => {
-  const { category, postId } = match.params;
+
+  const { postId } = match.params;
   const [categoryList, setCategoryList] = useState([]);
   const [form, setForm] = useState({
     writer: userEmail,
     title: '',
     content: '',
-    category: '',
+    categoryId: '',
   });
+
   const [valid, setValid] = useState({
     title: false,
     content: false,
@@ -37,7 +39,7 @@ const PostWriteForm = ({ match, userEmail, post }) => {
           ...form,
           title: post.title,
           content: post.content,
-          category: post.category,
+          categoryId: post.category.id,
         });
       });
   }, []);
@@ -72,8 +74,8 @@ const PostWriteForm = ({ match, userEmail, post }) => {
       .then((res) => {
         return res.data;
       })
-      .then((data) => {
-        console.log(data);
+      .then((post) => {
+        history.push(`/${post.category.path}/${post.id}`);
       })
       .catch(() => alert('error'));
   };
@@ -83,9 +85,9 @@ const PostWriteForm = ({ match, userEmail, post }) => {
       <h2>{ postId ? '수정하기' : '작성하기' }</h2>
       <select
         className="CategorySelect"
-        name="category"
+        name="categoryId"
         onChange={handleChange}
-        value={form.category.id}
+        value={form.categoryId}
       >
         <option value="">카테고리</option>
         {

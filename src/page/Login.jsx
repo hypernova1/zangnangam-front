@@ -5,37 +5,38 @@ import { useHistory, useLocation } from 'react-router';
 import { loginThunk } from '../reducers/auth';
 
 const Login = ({ loginThunk, isAuthenticated }) => {
+
+  const history = useHistory();
+  const location = useLocation();
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
-
-  const history = useHistory();
-  const location = useLocation();
-
-  const { from } = location.state || { form: { pathname: '/' } };
+  const { from } = location.state || { from: { pathname: '/' } };
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/');
+      history.push(from.pathname);
     }
-  }, [isAuthenticated, history]);
+  }, [isAuthenticated, history, from.pathname]);
+
   const updateField = (e) => {
     setForm({
       ...form,
       [e.target.id]: e.target.value,
     });
   };
+
   const handleClick = async () => {
     const result = await loginThunk(form.email, form.password);
     if (result) {
-      history.push(from);
+      history.push(from.pathname);
     } else {
       alert('계정 정보가 일치하지 않습니다.');
     }
   };
   return (
-    <div className="LoginTemplate">
+    <form className="LoginTemplate">
       <div className="LoginInput">
         <div className="Label">
             Email
@@ -49,13 +50,24 @@ const Login = ({ loginThunk, isAuthenticated }) => {
           Password
         </div>
         <div className="Password">
-          <input type="password" value={form.password} id="password" onChange={updateField} />
+          <input
+            type="password"
+            value={form.password}
+            id="password"
+            onChange={updateField}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleClick();
+              }
+            }}
+            autoComplete="false"
+          />
         </div>
       </div>
       <div className="LoginBtnWrap">
         <button type="button" onClick={handleClick}>로그인</button>
       </div>
-    </div>
+    </form>
   );
 };
 

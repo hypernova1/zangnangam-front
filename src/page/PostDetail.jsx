@@ -7,7 +7,7 @@ import Comment from '../components/Comment';
 import { savePost } from '../reducers/post';
 
 const PostDetail = ({ match, userEmail, savePost }) => {
-  const { category, postId } = match.params;
+  const { categoryPath, postId } = match.params;
   const history = useHistory();
   const [post, setPost] = useState({});
   const [writerEmail, setWriterEmail] = useState('');
@@ -18,18 +18,18 @@ const PostDetail = ({ match, userEmail, savePost }) => {
     nonMemberPwd: '',
     content: '',
     postId,
-    category,
+    categoryPath,
   });
 
   useEffect(() => {
-    getPostDetail(category, postId)
+    getPostDetail(categoryPath, postId)
       .then((res) => res.data)
       .then((data) => {
         setPost(data);
         setWriterEmail(data.writer.email);
         setComments(data.comments);
       });
-  }, []);
+  }, [categoryPath, postId]);
 
   const createMarkUp = () => ({
     __html: post.content,
@@ -58,17 +58,17 @@ const PostDetail = ({ match, userEmail, savePost }) => {
 
   const modifyPost = () => {
     savePost(post);
-    history.push(`/modify/${category}/${post.id}`);
+    history.push(`/${categoryPath}/modify/${post.id}`);
   };
 
   const deletePost = () => {
     // eslint-disable-next-line no-restricted-globals,no-alert
     const _confirm = confirm('삭제하시겠습니까?');
     if(!_confirm) return;
-    removePost(postId, category)
+    removePost(postId, categoryPath)
       .then((res) => res.data)
       .then(() => {
-        history.push(`/${category}`);
+        history.push(`/${categoryPath}`);
       })
       .catch((error) => alert(error));
   };
@@ -88,7 +88,7 @@ const PostDetail = ({ match, userEmail, savePost }) => {
       <div className="PostComment">
         <div className="CommentInfo">
           Comment
-          {' '}{ comments.length }
+          {' '} { comments.length }
           {
             userEmail === writerEmail && (
               <div className="PostButton">
@@ -106,7 +106,7 @@ const PostDetail = ({ match, userEmail, savePost }) => {
             )
           }
         </div>
-        <div className="WriteComment">
+        <form className="WriteComment">
           <div className="CommentWriter">
             <input
               type="text"
@@ -123,6 +123,7 @@ const PostDetail = ({ match, userEmail, savePost }) => {
               name="nonMemberPwd"
               onChange={handleChange}
               value={commentForm.nonMemberPwd}
+              autoComplete="true"
             />
           </div>
           <div className="InputComment">
@@ -141,7 +142,7 @@ const PostDetail = ({ match, userEmail, savePost }) => {
               등록
             </button>
           </div>
-        </div>
+        </form>
         <ul className="CommentWrap">
           {
             comments.map((comment) => (
