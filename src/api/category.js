@@ -1,5 +1,8 @@
-import axios from 'axios';
+import authAxios from './authAxios';
 
 export const getCategories = () => {
-  return axios.get('http://localhost:3300/category');
+  return authAxios({
+    url: 'http://localhost:3300/category',
+    method: 'GET',
+  });
 };

@@ -1,7 +1,11 @@
-import axios from 'axios';
+import authAxios from './authAxios';
 
 export const writeComment = (form) => {
-  return axios.post('http://localhost:3300/comment', {
-    ...form,
+  return authAxios({
+    url: 'http://localhost:3300/comment',
+    method: 'POST',
+    data: {
+      ...form,
+    },
   });
 };

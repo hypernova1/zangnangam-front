@@ -72,6 +72,11 @@ export default function auth(state = initialState, action) {
           email: '',
         },
       };
+    case SAVE_USER_SUMMARY:
+      return {
+        ...state,
+        userSummary: action.payload.userSummary,
+      };
     default:
       return state;
   }

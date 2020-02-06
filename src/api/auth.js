@@ -1,15 +1,18 @@
-import axios from 'axios';
+import authAxios from './authAxios';
 
 export const login = (email, password) => {
-  return axios.post('http://localhost:3300/auth/signin', {
-    email, password,
+  return authAxios({
+    url: 'http://localhost:3300/auth/signin',
+    method: 'POST',
+    data: {
+      email, password,
+    },
   });
 };
 
 export const getUserSummary = () => {
-  return axios.get('http://localhost:3300/user/me', {
-    headers: {
-      Authorization: localStorage.getItem('accessToken'),
-    },
+  return authAxios({
+    url: 'http://localhost:3300/user/me',
+    method: 'GET',
   });
 };

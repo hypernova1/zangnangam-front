@@ -1,33 +1,43 @@
 import axios from 'axios';
+import authAxios from "./authAxios";
 
 export const getPostList = (categoryPath, page) => {
-  return axios.get(`http://localhost:3300/post/${categoryPath}`, {
-    params: {
-      page,
-    },
+  return authAxios({
+    url: `http://localhost:3300/post/${categoryPath}?page=${page}`,
+    method: 'GET',
   });
 };
 
 export const getPostDetail = (categoryPath, postId) => {
-  return axios.get(`http://localhost:3300/post/${categoryPath}/${postId}`);
+  return authAxios({
+    url: `http://localhost:3300/post/${categoryPath}/${postId}`,
+    method: 'GET',
+  });
 };
 
 export const writePost = (post) => {
-  return axios.post('http://localhost:3300/post', {
-    ...post,
+  return authAxios({
+    url: 'http://localhost:3300/post',
+    method: 'POST',
+    data: {
+      ...post,
+    },
   });
 };
 
 export const modifyPost = (post, postId) => {
-  return axios.put(`http://localhost:3300/post/${postId}`, {
-    ...post,
+  return authAxios({
+    url: `http://localhost:3300/post/${postId}`,
+    method: 'PUT',
+    data: {
+      ...post,
+    },
   });
 };
 
 export const removePost = (postId, categoryPath) => {
-  return axios.delete(`http://localhost:3300/post/${postId}`, {
-    params: {
-      categoryPath,
-    },
+  return authAxios({
+    url: `http://localhost:3300/post/${postId}?categoryPath=${categoryPath}`,
+    method: 'DELETE',
   });
 };

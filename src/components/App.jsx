@@ -25,7 +25,7 @@ const App = ({ isAuthenticated, userSummary, saveUserSummary, loginFailure }) =>
       getUserSummary()
         .then((res) => res.data)
         .then((data) => {
-          console.log(data);
+          saveUserSummary(data);
         })
         .catch((err) => {
           console.log(err);

@@ -22,7 +22,6 @@ const PostDetail = ({ match, userEmail, savePost }) => {
   });
 
   useEffect(() => {
-    console.log(userEmail)
     getPostDetail(categoryPath, postId)
       .then((res) => res.data)
       .then((data) => {
@@ -160,7 +159,7 @@ const PostDetail = ({ match, userEmail, savePost }) => {
 };
 
 const mapStateToProps = (state) => ({
-  userEmail: state.auth,
+  userEmail: state.auth.userSummary.email,
 });
 
 const mapDispatchToProps = (dispatch) => ({
