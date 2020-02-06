@@ -4,12 +4,13 @@ import CommentForm from './CommentForm';
 import Comment from './Comment';
 import './CommentWrapper.css';
 
-const CommentWrapper = ({ comments, postId, categoryPath, onClickWriteComment }) => (
+const CommentWrapper = ({ comments, postId, categoryPath, onClickWriteComment, userSummary }) => (
   <div className="CommentWrapper">
     <CommentForm
       postId={postId}
       categoryPath={categoryPath}
       onClickWriteComment={onClickWriteComment}
+      userSummary={userSummary}
     />
     <ul className="CommentList">
       {
@@ -25,7 +26,7 @@ const CommentWrapper = ({ comments, postId, categoryPath, onClickWriteComment })
 );
 
 const mapStateToProps = (state) => ({
-  userEmail: state.auth.userSummary.email,
+  userSummary: state.auth.userSummary,
 });
 
 export default connect(mapStateToProps)(CommentWrapper);

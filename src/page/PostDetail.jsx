@@ -18,7 +18,6 @@ const PostDetail = ({ match, userEmail, savePost }) => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    console.log(userEmail);
     getPostDetail(categoryPath, postId)
       .then((res) => res.data)
       .then((data) => {

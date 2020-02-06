@@ -1,22 +1,25 @@
 .Comment {
     margin: 1rem;
+    border-bottom: 1px solid #ecf0f1;
 }
 
 .Comment .CommentWriter {
-    display: inline-block;
-    width: 132px;
-    font-weight: bold;
-    vertical-align: top;
 }
 
 .Comment .CommentContent {
-    display: inline-block;
-    width: 70%;
     word-break: break-all;
+    margin: 1rem;
 }
 
 .Comment .CommentWriteDate {
     display: inline-block;
-    font-size: 0.8rem;
-    float: right;
+    font-size: 0.7rem;
+    color: #7f8c8d;
+}
+
+.Comment .ModifyCommentForm > textarea {
+    margin-left: 1rem;
+    width: 100%;
+    height: 5rem;
+    resize: none;
 }

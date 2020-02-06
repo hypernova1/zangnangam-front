@@ -1,3 +1,8 @@
+.CommentForm {
+    position: relative;
+    margin: 1rem 0;
+}
+
 .CommentForm .InputComment {
     display: inline-block;
     width: 60%;

@@ -4,12 +4,6 @@
     font-size: 0.8rem;
 }
 
-.CommentWrapper .CommentForm {
-    position: relative;
-    margin: 1rem 0;
-    border-bottom: 1px solid #ecf0f1;
-}
-
 .InputComment > textarea {
     width: 100%;
     height: 6rem;

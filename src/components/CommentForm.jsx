@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './CommentForm.css';
 
-const CommentForm = ({ postId, categoryPath, onClickWriteComment }) => {
+const CommentForm = ({ postId, categoryPath, userSummary, onClickWriteComment }) => {
   const [commentForm, setCommentForm] = useState({
-    userInfo: {},
+    email: userSummary.email,
     nonMemberName: '',
     nonMemberPwd: '',
     content: '',
@@ -21,23 +21,32 @@ const CommentForm = ({ postId, categoryPath, onClickWriteComment }) => {
   return (
     <form className="CommentForm">
       <div className="CommentWriter">
-        <input
-          type="text"
-          placeholder="이름"
-          className="WriterName"
-          name="nonMemberName"
-          onChange={handleChange}
-          value={commentForm.nonMemberName}
-        />
-        <input
-          type="password"
-          placeholder="비밀번호"
-          className="WriterPassword"
-          name="nonMemberPwd"
-          onChange={handleChange}
-          value={commentForm.nonMemberPwd}
-          autoComplete="true"
-        />
+        { userSummary.id ? (
+          <>
+            <div>{userSummary.email}</div>
+            <div>{userSummary.name}</div>
+          </>
+        ) : (
+          <>
+            <input
+              type="text"
+              placeholder="이름"
+              className="WriterName"
+              name="nonMemberName"
+              onChange={handleChange}
+              value={commentForm.nonMemberName}
+            />
+            <input
+              type="password"
+              placeholder="비밀번호"
+              className="WriterPassword"
+              name="nonMemberPwd"
+              onChange={handleChange}
+              value={commentForm.nonMemberPwd}
+              autoComplete="true"
+            />
+          </>
+        )}
       </div>
       <div className="InputComment">
         <textarea
