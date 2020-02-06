@@ -1,5 +1,4 @@
-import axios from 'axios';
-import authAxios from "./authAxios";
+import authAxios from './authAxios';
 
 export const getPostList = (categoryPath, page) => {
   return authAxios({

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import Post from '../components/Post';
 import { getPostList } from '../api';
 import './PostList.css';
@@ -12,6 +12,7 @@ const PostList = ({ match, isAuthenticated }) => {
   const [categoryName, setCategoryName] = useState('');
   const [next, setNext] = useState(false);
   const pageNo = useRef(1);
+  const history = useHistory();
 
   useEffect(() => {
     getPostList(categoryPath, pageNo.current)
@@ -20,6 +21,10 @@ const PostList = ({ match, isAuthenticated }) => {
         setPostList(data.postList);
         setCategoryName(data.categoryName);
         setNext(data.next);
+      })
+      .catch((err) => {
+        console.error(err);
+        history.push('/notfound');
       });
     return () => {
       pageNo.current = 1;

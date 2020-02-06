@@ -1,0 +1,17 @@
+.CommentForm .InputComment {
+    display: inline-block;
+    width: 60%;
+}
+
+.CommentForm .CommentButtonWrap {
+    display: inline-block;
+    margin-left: 1rem;
+    vertical-align: top;
+}
+
+.CommentForm .CommentWriter {
+    display: inline-block;
+    width: 11rem;
+    text-align: center;
+    vertical-align: top;
+}

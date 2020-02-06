@@ -19,51 +19,13 @@
     color: #7f8c8d;
 }
 
-.PostComment {
-}
 
-.PostComment .CommentInfo {
-    border-bottom: 1px solid #ecf0f1;
-    padding: 1rem 0 0.5rem;
-    font-size: 0.8rem;
-}
 
-.PostComment .WriteComment {
-    position: relative;
-    margin: 1rem 0;
+.CommentInfo {
     border-bottom: 1px solid #ecf0f1;
 }
 
-.WriteComment .CommentWriter {
-    display: inline-block;
-    width: 11rem;
-    text-align: center;
-    vertical-align: top;
-}
-
-.WriteComment .InputComment {
-    display: inline-block;
-    width: 60%;
-}
-
-.InputComment > textarea {
-    width: 100%;
-    height: 6rem;
-    resize: none;
-    border-radius: 3px;
-    border-color: #7f8c8d;
-}
-
-.WriterName, .WriterPassword {
-    height: 1.5rem;
-    margin-bottom: 0.7rem;
-}
-
-.CommentWrap {
-    list-style: none;
-}
-
-.PostButton {
+.CommentInfo .PostButton {
     float: right;
 }
 
@@ -72,25 +34,4 @@
     padding: 0 0.5rem;
     cursor: pointer;
     color: #a4b0be;
-}
-
-.WriteComment .CommentButtonWrap {
-    display: inline-block;
-    margin-left: 1rem;
-    vertical-align: top;
-}
-
-.CommentButtonWrap .CommentButton {
-    all: unset;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    border: 1px solid #7f8c8d;
-    border-radius: 3px;
-    height: 4rem;
-    cursor: pointer;
-    color: #2c3e50;
-}
-
-.CommentButtonWrap .CommentButton:active {
-    background-color: #dcdde1;
 }

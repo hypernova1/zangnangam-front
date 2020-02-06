@@ -4,22 +4,21 @@ import {
   BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Header from './Header';
-import Navigator from './Navigator';
-import PrivateRoute from './PrivateRoute';
+import Header from './components/Header';
+import Navigator from './components/Navigator';
+import PrivateRoute from './components/PrivateRoute';
 
-import Main from '../page/Main';
-import Login from '../page/Login';
-import PostList from '../page/PostList';
-import PostDetail from '../page/PostDetail';
-import PostWriteForm from '../page/PostWriteForm';
-import NotFound from '../page/NotFound';
+import Main from './page/Main';
+import Login from './page/Login';
+import PostList from './page/PostList';
+import PostDetail from './page/PostDetail';
+import PostWriteForm from './page/PostWriteForm';
+import NotFound from './page/NotFound';
 
-import { getUserSummary } from '../api';
-import { saveUserSummary, loginFailure } from '../reducers/auth';
+import { getUserSummary } from './api';
+import { saveUserSummary, loginFailure } from './reducers/auth';
 
 const App = ({ isAuthenticated, userSummary, saveUserSummary, loginFailure }) => {
-
   useEffect(() => {
     if (isAuthenticated && !userSummary.email) {
       getUserSummary()
@@ -28,11 +27,10 @@ const App = ({ isAuthenticated, userSummary, saveUserSummary, loginFailure }) =>
           saveUserSummary(data);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           loginFailure();
         });
     }
-
   });
 
   return (
@@ -41,6 +39,7 @@ const App = ({ isAuthenticated, userSummary, saveUserSummary, loginFailure }) =>
       <Header />
       <section className="MainContent">
         <Switch>
+          <Route exact path="/notfound" component={NotFound} />
           <Route exact path="/" component={Main} />
           <Route path="/login" component={Login} />
           <PrivateRoute
