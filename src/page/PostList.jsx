@@ -83,7 +83,6 @@ const PostList = ({ match, isAuthenticated }) => {
 };
 
 const mapStateToProps = (state) => ({
-  userEmail: state.auth.userInfo.email,
   isAuthenticated: state.auth.isAuthenticated,
 });
 

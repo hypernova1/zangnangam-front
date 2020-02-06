@@ -4,16 +4,14 @@ const LOGIN_REQUEST = 'auth/LOGIN_REQUEST';
 const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
 const LOGOUT = 'auth/LOGOUT';
+const SAVE_USER_SUMMARY = 'auth/SAVE_USER_SUMMARY';
 
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,
 });
 
-export const loginSuccess = (userInfo) => ({
+export const loginSuccess = () => ({
   type: LOGIN_SUCCESS,
-  payload: {
-    userInfo,
-  },
 });
 
 export const loginFailure = () => ({
@@ -24,27 +22,37 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
+export const saveUserSummary = (userSummary) => ({
+  type: SAVE_USER_SUMMARY,
+  payload: {
+    userSummary,
+  },
+});
+
 export const loginThunk = (email, password) => (dispatch) => {
   dispatch(loginRequest());
 
-  return api.login(email, password).then(
-    (result) => {
-      if (result.data) {
-        dispatch(loginSuccess(result.data));
+  return api.login(email, password)
+    .then((res) => res.data)
+    .then((data) => {
+      if (data.accessToken) {
+        const accessToken = data.tokenType + ' ' + data.accessToken;
+        localStorage.setItem('accessToken', accessToken);
+        dispatch(loginSuccess());
         return true;
       }
       dispatch(loginFailure());
       return false;
-    },
-  ).catch((error) => {
-    console.log(error);
-    dispatch(loginFailure());
-  });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(loginFailure());
+    });
 };
 
 const initialState = {
   isAuthenticated: false,
-  userInfo: {
+  userSummary: {
     email: '',
   },
 };
@@ -53,13 +61,14 @@ export default function auth(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
+        ...state,
         isAuthenticated: true,
-        userInfo: action.payload.userInfo,
       };
     case LOGIN_FAILURE: case LOGOUT:
+      localStorage.removeItem('accessToken');
       return {
         isAuthenticated: false,
-        userInfo: {
+        userSummary: {
           email: '',
         },
       };

@@ -1,4 +1,7 @@
-export { login } from './auth';
+export {
+  login,
+  getUserSummary,
+} from './auth';
 export { getCategories } from './category';
 export {
   getPostDetail,

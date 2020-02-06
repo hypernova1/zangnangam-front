@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getPostList = (categoryPath, page) => {
-  return axios.get(`http://localhost:3300/${categoryPath}`, {
+  return axios.get(`http://localhost:3300/post/${categoryPath}`, {
     params: {
       page,
     },
@@ -9,7 +9,7 @@ export const getPostList = (categoryPath, page) => {
 };
 
 export const getPostDetail = (categoryPath, postId) => {
-  return axios.get(`http://localhost:3300/${categoryPath}/${postId}`);
+  return axios.get(`http://localhost:3300/post/${categoryPath}/${postId}`);
 };
 
 export const writePost = (post) => {

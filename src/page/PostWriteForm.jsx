@@ -138,7 +138,7 @@ const PostWriteForm = ({ match, userEmail, post }) => {
 };
 
 const mapStateToProps = (state) => ({
-  userEmail: state.auth.userInfo.email,
+  userEmail: state.auth.userSummary.email,
   post: state.post.post,
 });
 
