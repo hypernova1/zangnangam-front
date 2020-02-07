@@ -7,6 +7,8 @@ import {
   getPostDetail,
   removePost,
   writeComment,
+  modifyComment,
+  removeComment,
 } from '../api';
 import { savePost } from '../reducers/post';
 
@@ -58,6 +60,20 @@ const PostDetail = ({ match, userEmail, savePost }) => {
       .then((data) => setComments(data));
   };
 
+  const onClickModifyComment = (comment) => {
+    modifyComment(comment)
+      .then((res) => res.data)
+      .then((data) => setComments(data));
+  };
+
+  const onClickDeleteComment = (commentId, postId) => {
+    removeComment(commentId, postId)
+      .then((res) => res.data)
+      .then((data) => {
+        setComments(data);
+      });
+  };
+
   return (
     <article className="PostDetail">
       <div className="PostHeader">
@@ -94,6 +110,8 @@ const PostDetail = ({ match, userEmail, savePost }) => {
         postId={postId}
         categoryPath={categoryPath}
         onClickWriteComment={onClickWriteComment}
+        onClickModifyComment={onClickModifyComment}
+        onClickDeleteComment={onClickDeleteComment}
       />
     </article>
   );

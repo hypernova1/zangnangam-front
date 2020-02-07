@@ -23,3 +23,17 @@
     height: 5rem;
     resize: none;
 }
+
+.Comment .CommentModifyButtonWrap {
+    position: relative;
+    text-align: right;
+    bottom: 0.5rem;
+    right: 0.5rem;
+}
+
+.CommentModifyButton, .CommentDeleteButton, .CommentConfirmButton {
+    all: unset;
+    margin: 0.5rem;
+    font-size: 0.6rem;
+    cursor: pointer;
+}
