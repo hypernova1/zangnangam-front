@@ -4,7 +4,7 @@ import CommentForm from './CommentForm';
 import Comment from './Comment';
 import './CommentWrapper.css';
 
-const CommentWrapper = ({ comments, postId, userSummary ,onClickWriteComment, onClickModifyComment, onClickDeleteComment }) => (
+const CommentWrapper = ({ comments, postId, userSummary ,onClickWriteComment, onClickModifyComment, onClickRemoveComment }) => (
   <div className="CommentWrapper">
     <CommentForm
       postId={postId}
@@ -19,7 +19,7 @@ const CommentWrapper = ({ comments, postId, userSummary ,onClickWriteComment, on
             comment={comment}
             postId={postId}
             onClickModifyComment={onClickModifyComment}
-            onClickDeleteComment={onClickDeleteComment}
+            onClickDeleteComment={onClickRemoveComment}
           />
         ))
       }

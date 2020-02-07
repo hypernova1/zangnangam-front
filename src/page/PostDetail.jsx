@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import CommentWrapper from '../components/CommentWrapper';
+import CommentWrapper from '../components/comment/CommentWrapper';
 import './PostDetail.css';
 import {
   getPostDetail,
@@ -44,8 +44,8 @@ const PostDetail = ({ match, userEmail, savePost }) => {
 
   const deletePost = () => {
     // eslint-disable-next-line no-restricted-globals,no-alert
-    const _confirm = confirm('삭제하시겠습니까?');
-    if (!_confirm) return;
+    const confirmRemove = confirm('삭제하시겠습니까?');
+    if (!confirmRemove) return;
     removePost(postId, categoryPath)
       .then((res) => res.data)
       .then(() => {
@@ -66,7 +66,7 @@ const PostDetail = ({ match, userEmail, savePost }) => {
       .then((data) => setComments(data));
   };
 
-  const onClickDeleteComment = (commentId, postId) => {
+  const onClickRemoveComment = (commentId, postId) => {
     removeComment(commentId, postId)
       .then((res) => res.data)
       .then((data) => {
@@ -111,7 +111,7 @@ const PostDetail = ({ match, userEmail, savePost }) => {
         categoryPath={categoryPath}
         onClickWriteComment={onClickWriteComment}
         onClickModifyComment={onClickModifyComment}
-        onClickDeleteComment={onClickDeleteComment}
+        onClickDeleteComment={onClickRemoveComment}
       />
     </article>
   );

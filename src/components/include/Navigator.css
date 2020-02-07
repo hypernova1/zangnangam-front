@@ -7,25 +7,13 @@
     background-color: #2f3640;
 }
 
-.logo {
+.Logo {
     font-size: 1.2rem;
     margin: 2rem 2rem 3rem 2rem;
     text-decoration: none;
     color: white;
     text-align: center;
 
-}
-
-.link {
-    display: block;
-    text-decoration: none;
-    color: #f5f6fa;
-    margin: 1rem 0 1rem 1rem;
-}
-
-.is-active {
-    border-right: 2px solid;
-    color: red;
 }
 
 .CategoryTitles {

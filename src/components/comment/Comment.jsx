@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Comment.css';
 
-const Comment = ({ comment, postId, onClickModifyComment, onClickDeleteComment }) => {
+const Comment = ({ comment,postId, onClickModifyComment, onClickDeleteComment }) => {
   const [modifyState, setModifyState] = useState(false);
   const [commentData, setCommentData] = useState(comment);
 
