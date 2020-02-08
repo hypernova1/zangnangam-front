@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import './Comment.css';
 
-const Comment = ({ comment,postId, onClickModifyComment, onClickDeleteComment }) => {
+const Comment = ({ comment, postId, userEmail, onClickModifyComment, onClickRemoveComment }) => {
   const [modifyState, setModifyState] = useState(false);
-  const [commentData, setCommentData] = useState(comment);
+  const [commentData, setCommentData] = useState({
+    ...comment,
+  });
 
   const handleModify = () => {
     setModifyState(!modifyState);
@@ -23,27 +26,12 @@ const Comment = ({ comment,postId, onClickModifyComment, onClickDeleteComment })
   };
 
   const handleRemove = () => {
-    onClickDeleteComment(commentData.id, postId);
+    onClickRemoveComment(commentData.id, postId);
   };
 
-  return (
-    <li className="Comment">
-      <div className="CommentWriter">{ commentData.writer ? commentData.writer.name : commentData.nonMemberName }</div>
-      <div className="CommentWriteDate">{ commentData.created }</div>
-      <div className="CommentContent">
-        {
-          modifyState ? (
-            <div className="ModifyCommentForm">
-              <textarea
-                value={commentData.content}
-                onChange={handleChange}
-              />
-            </div>
-          ) : (
-            <div>{ commentData.content }</div>
-          )
-        }
-      </div>
+  const renderModifyButton = () => {
+    if (commentData.nonMemberName) return;
+    return userEmail === commentData.writer.email && (
       <div className="CommentModifyButtonWrap">
         {
           modifyState ? (
@@ -74,8 +62,34 @@ const Comment = ({ comment,postId, onClickModifyComment, onClickDeleteComment })
           )
         }
       </div>
+    );
+  };
+
+  return (
+    <li className="Comment">
+      <div className="CommentWriter">{ commentData.writer ? commentData.writer.name : commentData.nonMemberName }</div>
+      <div className="CommentWriteDate">{ commentData.created }</div>
+      <div className="CommentContent">
+        {
+          modifyState ? (
+            <div className="ModifyCommentForm">
+              <textarea
+                value={commentData.content}
+                onChange={handleChange}
+              />
+            </div>
+          ) : (
+            <div>{ commentData.content }</div>
+          )
+        }
+      </div>
+      { renderModifyButton() }
     </li>
   );
 };
 
-export default Comment;
+const mapStateToProps = (state) => ({
+  userEmail: state.auth.userSummary.email,
+});
+
+export default connect(mapStateToProps)(Comment);

@@ -71,6 +71,10 @@ const PostDetail = ({ match, userEmail, savePost }) => {
       .then((res) => res.data)
       .then((data) => {
         setComments(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('권한이 없습니다.');
       });
   };
 
@@ -111,7 +115,7 @@ const PostDetail = ({ match, userEmail, savePost }) => {
         categoryPath={categoryPath}
         onClickWriteComment={onClickWriteComment}
         onClickModifyComment={onClickModifyComment}
-        onClickDeleteComment={onClickRemoveComment}
+        onClickRemoveComment={onClickRemoveComment}
       />
     </article>
   );
@@ -124,6 +128,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   savePost: (post) => dispatch(savePost(post)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

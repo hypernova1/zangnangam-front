@@ -19,7 +19,7 @@ const CommentWrapper = ({ comments, postId, userSummary ,onClickWriteComment, on
             comment={comment}
             postId={postId}
             onClickModifyComment={onClickModifyComment}
-            onClickDeleteComment={onClickRemoveComment}
+            onClickRemoveComment={onClickRemoveComment}
           />
         ))
       }
