@@ -1,0 +1,12 @@
+.Footer {
+    position: relative;
+    bottom: 0;
+    text-align: center;
+    height: 1.5rem;
+}
+
+.FooterContent {
+    display: inline-block;
+    color: #2c3e50;
+    vertical-align: middle;
+}

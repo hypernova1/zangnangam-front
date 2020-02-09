@@ -6,6 +6,7 @@
 .MainTemplate {
     display: flex;
     box-sizing: border-box;
+    min-height: 100%;
 }
 .MainContent {
     margin-left: 18rem;

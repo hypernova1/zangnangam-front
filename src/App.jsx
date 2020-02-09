@@ -6,6 +6,7 @@ import {
 import { connect } from 'react-redux';
 import Header from './components/Header';
 import Navigator from './components/Navigator';
+import Footer from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
 
 import Main from './page/Main';
@@ -54,6 +55,7 @@ const App = ({ isAuthenticated, userSummary, saveUserSummary, loginFailure }) =>
           <Route exact path="/:categoryPath/:postId" component={PostDetail} />
           <Route component={NotFound} />
         </Switch>
+        <Footer />
       </section>
     </Router>
   );

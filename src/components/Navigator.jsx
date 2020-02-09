@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './Navigator.css';
 import { NavLink } from 'react-router-dom';
 import { getCategories } from '../api';
+import gear from '../image/gear.png';
 
 const Navigator = () => {
   const [categories, setCategories] = useState([]);
@@ -34,6 +35,13 @@ const Navigator = () => {
           }
         </ul>
       </nav>
+      <div className="MenuSettingButtonWrap">
+        <img
+          className="MenuSettingButton"
+          src={gear}
+          alt="메뉴 설정"
+        />
+      </div>
     </aside>
   );
 };

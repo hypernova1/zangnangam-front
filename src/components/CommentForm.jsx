@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './CommentForm.css';
 
 const CommentForm = ({ postId, categoryPath, userSummary, onClickWriteComment }) => {
   const [commentForm, setCommentForm] = useState({
-    email: userSummary.email,
+    email: '',
     nonMemberName: '',
     nonMemberPwd: '',
     content: '',
     postId,
     categoryPath,
   });
+
+  useEffect(() => {
+    if (userSummary.email) {
+      setCommentForm({
+        ...commentForm,
+        email: userSummary.email,
+      });
+      return;
+    }
+    setCommentForm({
+      ...commentForm,
+      email: '',
+    });
+  }, [userSummary.email]);
 
   const handleChange = (e) => {
     setCommentForm({
