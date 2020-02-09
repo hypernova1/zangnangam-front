@@ -1,0 +1,43 @@
+.CommentForm {
+    position: relative;
+    margin: 1rem 0;
+    height: 8rem;
+    display: flex;
+}
+
+.CommentForm .CommentWriter input {
+    all: unset;
+    width: 10rem;
+    padding: 0.5rem;
+    border: 1px solid #95a5a6;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    margin: 0.3rem;
+    text-align: left;
+}
+
+.CommentForm .InputComment {
+    flex: 4;
+    display: inline-block;
+}
+
+.CommentForm .CommentButtonWrap {
+    display: inline-block;
+    margin-left: 1rem;
+    vertical-align: top;
+    flex: 1;
+}
+
+.CommentForm .CommentWriter {
+    display: inline-block;
+    float: left;
+    margin: 0.5rem;
+    text-align: center;
+    vertical-align: middle;
+    flex: 1;
+}
+
+.CommentForm .LoginMemberName {
+    font-size: 1.2rem;
+    font-weight: bold;
+}

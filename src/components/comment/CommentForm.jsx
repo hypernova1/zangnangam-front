@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import './CommentForm.css';
 
-const CommentForm = ({ postId, categoryPath, userSummary, onClickWriteComment }) => {
+const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
   const [commentForm, setCommentForm] = useState({
     email: '',
     nonMemberName: '',
     nonMemberPwd: '',
     content: '',
     postId,
-    categoryPath,
   });
 
   useEffect(() => {
@@ -37,8 +36,7 @@ const CommentForm = ({ postId, categoryPath, userSummary, onClickWriteComment })
       <div className="CommentWriter">
         { userSummary.id ? (
           <>
-            <div>{userSummary.email}</div>
-            <div>{userSummary.name}</div>
+            <div className="LoginMemberName">{userSummary.name}</div>
           </>
         ) : (
           <>

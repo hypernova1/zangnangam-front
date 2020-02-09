@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import './Navigator.css';
 import { NavLink } from 'react-router-dom';
-import { getCategories } from '../api';
-import gear from '../image/gear.png';
+import './Navigator.css';
+import NavigatorItem from './NavigatorItem';
+import { getCategories } from '../../api';
+import gear from '../../image/gear.png';
 
 const Navigator = () => {
   const [categories, setCategories] = useState([]);
@@ -17,20 +18,16 @@ const Navigator = () => {
 
   return (
     <aside className="MenuBar">
-      <NavLink exact to="/" className="logo">ZangNanGam</NavLink>
+      <NavLink exact to="/" className="Logo">ZangNanGam</NavLink>
       <nav>
         <ul className="CategoryTitles">
           {
             categories.map((category, index) => (
-              <li key={index}>
-                <NavLink
-                  to={`/${category.path}`}
-                  className="link"
-                  activeClassName="is-active"
-                >
-                  {category.name}
-                </NavLink>
-              </li>
+              <NavigatorItem
+                index={index}
+                category={category}
+                key={index}
+              />
             ))
           }
         </ul>

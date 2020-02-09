@@ -10,4 +10,8 @@ export {
   modifyPost,
   removePost,
 } from './post';
-export { writeComment } from './comment';
+export {
+  writeComment,
+  modifyComment,
+  removeComment,
+} from './comment';

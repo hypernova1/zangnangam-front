@@ -2,7 +2,7 @@ import React from 'react';
 import './Header.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout } from '../reducers/auth';
+import { logout } from '../../reducers/auth';
 
 const Header = ({ isAuthenticated, logout }) => {
   return (

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import CommentWrapper from '../components/CommentWrapper';
+import CommentWrapper from '../components/comment/CommentWrapper';
 import './PostDetail.css';
 import {
   getPostDetail,
   removePost,
   writeComment,
+  modifyComment,
+  removeComment,
 } from '../api';
 import { savePost } from '../reducers/post';
 
@@ -42,8 +44,8 @@ const PostDetail = ({ match, userEmail, savePost }) => {
 
   const deletePost = () => {
     // eslint-disable-next-line no-restricted-globals,no-alert
-    const _confirm = confirm('삭제하시겠습니까?');
-    if (!_confirm) return;
+    const confirmRemove = confirm('삭제하시겠습니까?');
+    if (!confirmRemove) return;
     removePost(postId, categoryPath)
       .then((res) => res.data)
       .then(() => {
@@ -56,6 +58,24 @@ const PostDetail = ({ match, userEmail, savePost }) => {
     writeComment(commentForm)
       .then((res) => res.data)
       .then((data) => setComments(data));
+  };
+
+  const onClickModifyComment = (comment) => {
+    modifyComment(comment)
+      .then((res) => res.data)
+      .then((data) => setComments(data));
+  };
+
+  const onClickRemoveComment = (commentId, postId) => {
+    removeComment(commentId, postId)
+      .then((res) => res.data)
+      .then((data) => {
+        setComments(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('권한이 없습니다.');
+      });
   };
 
   return (
@@ -94,6 +114,8 @@ const PostDetail = ({ match, userEmail, savePost }) => {
         postId={postId}
         categoryPath={categoryPath}
         onClickWriteComment={onClickWriteComment}
+        onClickModifyComment={onClickModifyComment}
+        onClickRemoveComment={onClickRemoveComment}
       />
     </article>
   );
@@ -106,6 +128,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   savePost: (post) => dispatch(savePost(post)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
