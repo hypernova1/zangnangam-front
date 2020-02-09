@@ -4,10 +4,10 @@ import {
   BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Header from './components/Header';
-import Navigator from './components/Navigator';
-import Footer from './components/Footer';
-import PrivateRoute from './components/PrivateRoute';
+import Header from './components/include/Header';
+import Navigator from './components/include/Navigator';
+import Footer from './components/include/Footer';
+import PrivateRoute from './components/util/PrivateRoute';
 
 import Main from './page/Main';
 import Login from './page/Login';
