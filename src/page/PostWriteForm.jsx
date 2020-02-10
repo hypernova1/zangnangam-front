@@ -20,11 +20,6 @@ const PostWriteForm = ({ match, userEmail, post }) => {
     categoryId: '',
   });
 
-  const [valid, setValid] = useState({
-    title: false,
-    content: false,
-    category: false,
-  });
   const history = useHistory();
 
   useEffect(() => {
@@ -61,9 +56,26 @@ const PostWriteForm = ({ match, userEmail, post }) => {
       content: e.target.getContent(),
     });
   };
+  const validateForm = () => {
+    if (!form.categoryId) {
+      alert('카테고리를 선택해주세요.');
+      return false;
+    }
+    if (!form.title) {
+      alert('제목을 입력해주세요.');
+      return false;
+    }
+    if (!form.content) {
+      alert('내용을 입력해주세요.');
+      return false;
+    }
+    return true;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let result = validateForm();
+    if (!result) return;
     let promise;
     if (postId) {
       promise = modifyPost(form, postId);
