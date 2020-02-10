@@ -14,6 +14,7 @@ import Login from './page/Login';
 import PostList from './page/PostList';
 import PostDetail from './page/PostDetail';
 import PostWriteForm from './page/PostWriteForm';
+import CategoryManager from './page/CategoryManager';
 import NotFound from './page/NotFound';
 
 import { getUserSummary } from './api';
@@ -41,6 +42,7 @@ const App = ({ isAuthenticated, userSummary, saveUserSummary, loginFailure }) =>
       <section className="MainContent">
         <Switch>
           <Route exact path="/notfound" component={NotFound} />
+          <Route exact path="/category/manage" component={CategoryManager} />
           <Route exact path="/" component={Main} />
           <Route path="/login" component={Login} />
           <PrivateRoute

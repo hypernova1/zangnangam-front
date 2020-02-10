@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './Navigator.css';
 import NavigatorItem from './NavigatorItem';
 import { getCategories } from '../../api';
 import gear from '../../image/gear.png';
 
-const Navigator = () => {
+const Navigator = ({ userRole }) => {
   const [categories, setCategories] = useState([]);
-
+  const history = useHistory();
   useEffect(() => {
     getCategories()
       .then(res => res.data)
@@ -15,6 +16,10 @@ const Navigator = () => {
         setCategories(data);
       });
   }, [categories.length]);
+
+  const handleCategory = () => {
+    history.push('/category/manage');
+  };
 
   return (
     <aside className="MenuBar">
@@ -32,15 +37,24 @@ const Navigator = () => {
           }
         </ul>
       </nav>
-      <div className="MenuSettingButtonWrap">
-        <img
-          className="MenuSettingButton"
-          src={gear}
-          alt="메뉴 설정"
-        />
-      </div>
+      {
+        userRole === 'admin' && (
+          <div className="MenuSettingButtonWrap">
+            <img
+              className="MenuSettingButton"
+              src={gear}
+              alt="메뉴 설정"
+              onClick={handleCategory}
+            />
+          </div>
+        )
+      }
     </aside>
   );
 };
 
-export default Navigator;
+const mapStateToProps = (state) => ({
+  userRole: state.auth.userSummary.role,
+});
+
+export default connect(mapStateToProps)(Navigator);

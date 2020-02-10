@@ -44,7 +44,7 @@ export const loginThunk = (email, password) => (dispatch) => {
       dispatch(loginFailure());
       return false;
     })
-    .catch((error) => {
+    .catch((err) => {
       dispatch(loginFailure());
     });
 };
@@ -53,6 +53,7 @@ const initialState = {
   isAuthenticated: false,
   userSummary: {
     email: '',
+    role: '',
   },
 };
 
@@ -69,6 +70,7 @@ export default function auth(state = initialState, action) {
         isAuthenticated: false,
         userSummary: {
           email: '',
+          role: '',
         },
       };
     case SAVE_USER_SUMMARY:

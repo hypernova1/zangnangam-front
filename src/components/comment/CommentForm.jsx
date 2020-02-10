@@ -9,6 +9,10 @@ const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
     content: '',
     postId,
   });
+  const [commentValid] = useState({
+    writer: false,
+    content: false,
+  });
 
   useEffect(() => {
     if (userSummary.email) {
@@ -28,6 +32,32 @@ const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
     setCommentForm({
       ...commentForm,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const validateForm = () => {
+    const writer = !!(userSummary.email || (commentForm.nonMemberName && commentForm.nonMemberPwd));
+    const content = !!commentForm.content;
+    if (!writer) {
+      alert('이름을 입력해주세요.');
+      return false;
+    }
+    if (!content) {
+      alert('댓글 내용을 입력해주세요.');
+      return false;
+    }
+    return writer && content;
+  };
+
+  const submitForm = () => {
+    const result = validateForm();
+    if (!result) return;
+    onClickWriteComment(commentForm);
+    setCommentForm({
+      ...commentForm,
+      nonMemberName: '',
+      nonMemberPwd: '',
+      content: '',
     });
   };
 
@@ -71,15 +101,7 @@ const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
         <button
           type="button"
           className="CommentButton"
-          onClick={() => {
-            onClickWriteComment(commentForm);
-            setCommentForm({
-              ...commentForm,
-              nonMemberName: '',
-              nonMemberPwd: '',
-              content: '',
-            });
-          }}
+          onClick={submitForm}
         >
           등록
         </button>

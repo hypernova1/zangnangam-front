@@ -31,7 +31,7 @@ const Comment = ({ comment, postId, userEmail, onClickModifyComment, onClickRemo
 
   const renderModifyButton = () => {
     if (commentData.nonMemberName) return;
-    return userEmail === commentData.writer.email && (
+    return commentData.writer && userEmail === commentData.writer.email && (
       <div className="CommentModifyButtonWrap">
         {
           modifyState ? (

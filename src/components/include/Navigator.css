@@ -22,8 +22,11 @@
 }
 
 .MenuSettingButtonWrap {
-    position: relative;
+    position: absolute;
     margin: 1rem;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
 }
 
 .MenuSettingButton {
