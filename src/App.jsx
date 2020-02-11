@@ -1,21 +1,15 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import {
   BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Header from './components/include/Header';
-import Navigator from './components/include/Navigator';
-import Footer from './components/include/Footer';
-import PrivateRoute from './components/util/PrivateRoute';
-
-import Main from './page/Main';
-import Login from './page/Login';
-import PostList from './page/PostList';
-import PostDetail from './page/PostDetail';
-import PostWriteForm from './page/PostWriteForm';
-import CategoryManager from './page/CategoryManager';
-import NotFound from './page/NotFound';
+import {
+  Header, Navigator, Footer, PrivateRoute,
+} from './components';
+import {
+  CategoryManager, Main, Login, PostList, PostDetail, PostWriteForm, NotFound,
+} from './page';
+import './App.css';
 
 import { getUserSummary } from './api';
 import { saveUserSummary, loginFailure } from './reducers/auth';

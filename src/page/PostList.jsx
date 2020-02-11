@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import Post from '../components/post/Post';
+import { Post } from '../components';
 import { getPostList } from '../api';
 import './PostList.css';
 

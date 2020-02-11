@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import Warning from '../util/Warning';
 import './CommentForm.css';
 
 const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
@@ -9,10 +10,8 @@ const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
     content: '',
     postId,
   });
-  const [commentValid] = useState({
-    writer: false,
-    content: false,
-  });
+  const [warningVisibility, setWarningVisibility] = useState(false);
+  const [warningMessage, setWarningMessage] = useState('');
 
   useEffect(() => {
     if (userSummary.email) {
@@ -35,15 +34,23 @@ const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
     });
   };
 
+  const showWarning = (message) => {
+    setWarningMessage(message);
+    setWarningVisibility(true);
+    setTimeout(() => {
+      setWarningVisibility(false);
+    }, 1500);
+  };
+
   const validateForm = () => {
     const writer = !!(userSummary.email || (commentForm.nonMemberName && commentForm.nonMemberPwd));
     const content = !!commentForm.content;
     if (!writer) {
-      alert('이름을 입력해주세요.');
+      showWarning('이름을 입력해주세요.');
       return false;
     }
     if (!content) {
-      alert('댓글 내용을 입력해주세요.');
+      showWarning('내용을 입력해주세요.');
       return false;
     }
     return writer && content;
@@ -106,6 +113,7 @@ const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
           등록
         </button>
       </div>
+      <Warning visible={warningVisibility} message={warningMessage} />
     </form>
   );
 };

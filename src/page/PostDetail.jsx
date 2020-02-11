@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import CommentWrapper from '../components/comment/CommentWrapper';
+import { CommentWrapper, Warning } from '../components';
 import './PostDetail.css';
 import {
   getPostDetail,
