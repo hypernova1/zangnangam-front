@@ -8,6 +8,9 @@ import Navigator from './include/Navigator';
 
 import Post from './post/Post';
 
+import CategoryItem from './category/CategoryItem';
+import CategoryInfo from './category/CategoryInfo';
+
 import PrivateRoute from './util/PrivateRoute';
 import Warning from './util/Warning';
 
@@ -21,4 +24,6 @@ export {
   Post,
   PrivateRoute,
   Warning,
+  CategoryItem,
+  CategoryInfo
 };

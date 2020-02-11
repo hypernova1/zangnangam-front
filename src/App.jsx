@@ -11,12 +11,17 @@ import {
 } from './page';
 import './App.css';
 
-import { getUserSummary } from './api';
+import { getUserSummary, getCategories } from './api';
 import { saveUserSummary, loginFailure } from './reducers/auth';
+import { categoryThunk } from './reducers/category';
 
-const App = ({ isAuthenticated, userSummary, saveUserSummary, loginFailure }) => {
+const App = ({ isAuthenticated, saveUserSummary, loginFailure, categories, categoryThunk }) => {
   useEffect(() => {
-    if (isAuthenticated && !userSummary.email) {
+    if (!categories.length) {
+      categoryThunk();
+    }
+
+    if (isAuthenticated) {
       getUserSummary()
         .then((res) => res.data)
         .then((data) => {
@@ -27,11 +32,11 @@ const App = ({ isAuthenticated, userSummary, saveUserSummary, loginFailure }) =>
           loginFailure();
         });
     }
-  });
+  }, []);
 
   return (
     <Router className="MainTemplate">
-      <Navigator />
+      <Navigator categories={categories} />
       <Header />
       <section className="MainContent">
         <Switch>
@@ -60,11 +65,13 @@ const App = ({ isAuthenticated, userSummary, saveUserSummary, loginFailure }) =>
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   userSummary: state.auth.userSummary,
+  categories: state.category,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   saveUserSummary: (userSummary) => dispatch(saveUserSummary(userSummary)),
   loginFailure: () => dispatch(loginFailure()),
+  categoryThunk: () => dispatch(categoryThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

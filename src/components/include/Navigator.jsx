@@ -1,21 +1,14 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Navigator.css';
 import NavigatorItem from './NavigatorItem';
-import { getCategories } from '../../api';
 import gear from '../../image/gear.png';
 
-const Navigator = ({ userRole }) => {
-  const [categories, setCategories] = useState([]);
+const Navigator = ({ userRole, categories }) => {
   const history = useHistory();
   useEffect(() => {
-    getCategories()
-      .then(res => res.data)
-      .then(data => {
-        setCategories(data);
-      });
-  }, [categories.length]);
+  }, [categories]);
 
   const handleCategory = () => {
     history.push('/category/manage');
@@ -31,7 +24,7 @@ const Navigator = ({ userRole }) => {
               <NavigatorItem
                 index={index}
                 category={category}
-                key={index}
+                key={category.id}
               />
             ))
           }

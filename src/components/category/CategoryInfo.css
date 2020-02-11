@@ -1,0 +1,10 @@
+.CategoryInfo {
+    display: inline-block;
+    float: right;
+    margin: 2rem;
+    padding: 1rem;
+    width: 20rem;
+    height: 20rem;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+}
