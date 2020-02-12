@@ -11,11 +11,11 @@ import {
 } from './page';
 import './App.css';
 
-import { getUserSummary, getCategories } from './api';
+import { getUserSummary } from './api';
 import { saveUserSummary, loginFailure } from './reducers/auth';
 import { categoryThunk } from './reducers/category';
 
-const App = ({ isAuthenticated, saveUserSummary, loginFailure, categories, categoryThunk }) => {
+const App = ({ userSummary, isAuthenticated, saveUserSummary, loginFailure, categories, categoryThunk }) => {
   useEffect(() => {
     if (!categories.length) {
       categoryThunk();
@@ -32,7 +32,7 @@ const App = ({ isAuthenticated, saveUserSummary, loginFailure, categories, categ
           loginFailure();
         });
     }
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <Router className="MainTemplate">

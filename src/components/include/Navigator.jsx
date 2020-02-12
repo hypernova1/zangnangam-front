@@ -8,7 +8,7 @@ import gear from '../../image/gear.png';
 const Navigator = ({ userRole, categories }) => {
   const history = useHistory();
   useEffect(() => {
-  }, [categories]);
+  }, [categories, userRole]);
 
   const handleCategory = () => {
     history.push('/category/manage');

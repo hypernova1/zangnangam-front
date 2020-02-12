@@ -7,4 +7,46 @@
     height: 20rem;
     border: 1px solid #bdc3c7;
     border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px grey;
+}
+
+.CategoryInfo .CategoryInfoLabel {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+.CategoryInfo input {
+    all: unset;
+    padding: 0.5rem;
+    width: 18rem;
+    height: 1.5rem;
+    border: 1px solid #95a5a6;
+    border-radius: 4px;
+}
+
+.CategoryInfo select {
+    width: 15rem;
+    height: 3rem;
+    font-size: 1.5rem;
+}
+
+.CategoryInfo .CategoryModifyButtonWrap{
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.CategoryModifyButtonWrap button {
+    all: unset;
+    margin: 1rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #dcdde1;
+    border-radius: 4px;
+    color: #7f8c8d;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.CategoryModifyButtonWrap button:hover {
+    background-color: #dcdde1;
+    transition: 0.5s;
 }

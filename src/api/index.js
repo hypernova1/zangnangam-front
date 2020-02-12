@@ -2,7 +2,10 @@ export {
   login,
   getUserSummary,
 } from './auth';
-export { getCategories } from './category';
+export {
+  getCategories,
+  modifyCategory,
+} from './category';
 export {
   getPostDetail,
   getPostList,

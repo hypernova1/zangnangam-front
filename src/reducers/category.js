@@ -7,10 +7,10 @@ export const getCategory = () => ({
   type: GET_CATEGORY,
 });
 
-export const updateCategory = (category) => ({
+export const updateCategory = (categories) => ({
   type: UPDATE_CATEGORY,
   payload: {
-    category,
+    categories,
   },
 });
 
@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
       return state;
     case UPDATE_CATEGORY:
       return [
-        ...action.payload.category,
+        ...action.payload.categories,
       ];
     default:
       return state;

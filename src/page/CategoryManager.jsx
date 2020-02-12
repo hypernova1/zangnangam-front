@@ -1,36 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { CategoryItem, CategoryInfo } from '../components';
+import { CategoryItem, CategoryInfo, Warning } from '../components';
+import { updateCategory } from '../reducers/category';
+import { getCategories } from '../api';
 import './CategoryManager.css';
 
-const CategoryManager = ({ categories }) => {
+const CategoryManager = ({ categories, updateCategory }) => {
 
-  const [category, setCategory] = useState(categories[0]);
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
+
+  useEffect(() => {
+    getCategories()
+      .then((res) => res.data)
+      .then((data) => {
+        updateCategory(data);
+      });
+  }, []);
 
   const viewCategoryInfo = (id) => {
-    setCategory(categories[id]);
+    setActiveCategory(categories[id]);
   };
 
   return (
-    <div className="CategoryManager">
-      <div className="CategoryListWrap">
-        <button type="button" className="CategoryCreateButton">+</button>
-        <button type="button" className="CategoryRemoveButton">-</button>
-        <ul className="CategoryList">
-          {
-            categories && categories.map((category, index) => (
-              <CategoryItem
-                category={category}
-                index={index}
-                viewCategoryInfo={viewCategoryInfo}
-                key={category.id}
-              />
-            ))
-          }
-        </ul>
+    <>
+      <h1 className="CategoryName">메뉴 변경</h1>
+      <div className="CategoryManager">
+        <div className="CategoryListWrap">
+          <button type="button" className="CategoryCreateButton">+</button>
+          <button type="button" className="CategoryRemoveButton">-</button>
+          <ul className="CategoryList">
+            {
+              categories && categories.map((category, index) => (
+                <CategoryItem
+                  category={category}
+                  activeCategory={activeCategory.id}
+                  index={index}
+                  viewCategoryInfo={viewCategoryInfo}
+                  key={category.id}
+                />
+              ))
+            }
+          </ul>
+        </div>
+        <CategoryInfo
+          category={activeCategory}
+          setCategory={setActiveCategory}
+        />
       </div>
-      <CategoryInfo category={category} />
-    </div>
+    </>
   );
 };
 
@@ -38,4 +55,8 @@ const mapStateToProps = (state) => ({
   categories: state.category,
 });
 
-export default connect(mapStateToProps)(CategoryManager);
+const mapDispatchToProps = (dispatch) => ({
+  updateCategory: (categories) => dispatch(updateCategory(categories)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryManager);

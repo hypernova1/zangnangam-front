@@ -1,10 +1,10 @@
 .CategoryManager {
-    margin: 15% 20%;
+    margin: 8% 25%;
 }
 
 .CategoryManager .CategoryListWrap {
     display: inline-block;
-    width: 15rem;
+    width: 18rem;
 }
 
 .CategoryListWrap .CategoryList {
@@ -13,6 +13,7 @@
     border-radius: 5px;
     height: 20rem;
     overflow: auto;
+    box-shadow: 2px 2px 2px 2px grey;
 }
 
 .CategoryCreateButton, .CategoryRemoveButton {
