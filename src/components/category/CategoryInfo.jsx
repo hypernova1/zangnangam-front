@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import './CategoryInfo.css';
 import { modifyCategory } from '../../api';
 import { updateCategory } from '../../reducers/category';
-import {Warning} from "../index";
+import { popupThunk } from '../../reducers/popup';
 
-const CategoryInfo = ({ category, setCategory, updateCategory }) => {
-
-  const [warningMessage, setWarningMessage] = useState('');
-  const [warningVisibility, setWarningVisibility] = useState(false);
+const CategoryInfo = ({ category, setCategory, updateCategory, popupThunk }) => {
 
   const handleChange = (e) => {
     setCategory({
@@ -18,11 +15,7 @@ const CategoryInfo = ({ category, setCategory, updateCategory }) => {
   };
 
   const showWarning = (message) => {
-    setWarningMessage(message);
-    setWarningVisibility(true);
-    setTimeout(() => {
-      setWarningVisibility(false);
-    }, 1500);
+    popupThunk({ message });
   };
 
   const handleClick = () => {
@@ -48,13 +41,13 @@ const CategoryInfo = ({ category, setCategory, updateCategory }) => {
       <div className="CategoryModifyButtonWrap">
         <button type="button" onClick={handleClick}>수정</button>
       </div>
-      <Warning visible={warningVisibility} message={warningMessage} />
     </div>
   );
 };
 
 const mapDispatchToProps = (dispatch) => ({
   updateCategory: (categories) => dispatch(updateCategory(categories)),
+  popupThunk: (popup) => dispatch(popupThunk(popup)),
 });
 
 export default connect(null, mapDispatchToProps)(CategoryInfo);

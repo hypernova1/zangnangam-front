@@ -12,7 +12,7 @@ import CategoryItem from './category/CategoryItem';
 import CategoryInfo from './category/CategoryInfo';
 
 import PrivateRoute from './util/PrivateRoute';
-import Warning from './util/Warning';
+import FlashPopup from './util/FlashPopup';
 
 export {
   Comment,
@@ -23,7 +23,7 @@ export {
   Navigator,
   Post,
   PrivateRoute,
-  Warning,
+  FlashPopup,
   CategoryItem,
   CategoryInfo
 };

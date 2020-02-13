@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-  Header, Navigator, Footer, PrivateRoute,
+  Header, Navigator, Footer, PrivateRoute, FlashPopup,
 } from './components';
 import {
   CategoryManager, Main, Login, PostList, PostDetail, PostWriteForm, NotFound,
@@ -15,7 +15,9 @@ import { getUserSummary } from './api';
 import { saveUserSummary, loginFailure } from './reducers/auth';
 import { categoryThunk } from './reducers/category';
 
-const App = ({ userSummary, isAuthenticated, saveUserSummary, loginFailure, categories, categoryThunk }) => {
+const App = ({
+  userSummary, isAuthenticated, saveUserSummary, loginFailure, categories, categoryThunk,
+}) => {
   useEffect(() => {
     if (!categories.length) {
       categoryThunk();
@@ -58,6 +60,7 @@ const App = ({ userSummary, isAuthenticated, saveUserSummary, loginFailure, cate
         </Switch>
         <Footer />
       </section>
+      <FlashPopup />
     </Router>
   );
 };

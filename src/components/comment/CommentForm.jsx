@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Warning from '../util/Warning';
+import { connect } from 'react-redux';
 import './CommentForm.css';
+import { popupThunk } from '../../reducers/popup';
 
-const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
+const CommentForm = ({ postId, userSummary, onClickWriteComment, popupThunk }) => {
   const [commentForm, setCommentForm] = useState({
     email: '',
     nonMemberName: '',
@@ -10,8 +11,6 @@ const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
     content: '',
     postId,
   });
-  const [warningVisibility, setWarningVisibility] = useState(false);
-  const [warningMessage, setWarningMessage] = useState('');
 
   useEffect(() => {
     if (userSummary.email) {
@@ -35,11 +34,7 @@ const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
   };
 
   const showWarning = (message) => {
-    setWarningMessage(message);
-    setWarningVisibility(true);
-    setTimeout(() => {
-      setWarningVisibility(false);
-    }, 1500);
+    popupThunk({ message });
   };
 
   const validateForm = () => {
@@ -113,9 +108,12 @@ const CommentForm = ({ postId, userSummary, onClickWriteComment }) => {
           등록
         </button>
       </div>
-      <Warning visible={warningVisibility} message={warningMessage} />
     </form>
   );
 };
 
-export default CommentForm;
+const mapDispatchToProps = (dispatch) => ({
+  popupThunk: (popup) => dispatch(popupThunk(popup)),
+});
+
+export default connect(null, mapDispatchToProps)(CommentForm);
