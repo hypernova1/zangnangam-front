@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { CommentWrapper, Warning } from '../components';
+import { CommentWrapper } from '../components';
 import './PostDetail.css';
 import {
   getPostDetail,
@@ -11,8 +11,9 @@ import {
   removeComment,
 } from '../api';
 import { savePost } from '../reducers/post';
+import { popupThunk } from '../reducers/popup';
 
-const PostDetail = ({ match, userEmail, savePost }) => {
+const PostDetail = ({ match, userEmail, savePost, popupThunk }) => {
   const { categoryPath, postId } = match.params;
   const history = useHistory();
   const [post, setPost] = useState({});
@@ -74,7 +75,7 @@ const PostDetail = ({ match, userEmail, savePost }) => {
       })
       .catch((err) => {
         console.log(err);
-        alert('권한이 없습니다.');
+        popupThunk({ message: '권한이 없습니다.' });
       });
   };
 
@@ -127,6 +128,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   savePost: (post) => dispatch(savePost(post)),
+  popupThunk: (popup) => dispatch(popupThunk(popup)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

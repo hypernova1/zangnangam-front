@@ -12,10 +12,14 @@ const closePopup = () => ({
   type: CLOSE_POPUP,
 });
 
+let isRequest = false;
 export const popupThunk = (state) => (dispatch) => {
+  if (isRequest) return;
+  isRequest = true;
   dispatch(executePopup(state));
   setTimeout(() => {
     dispatch(closePopup());
+    isRequest = false;
   }, 1500);
 };
 

@@ -45,6 +45,7 @@ export const loginThunk = (email, password) => (dispatch) => {
       return false;
     })
     .catch((err) => {
+      console.log(err);
       dispatch(loginFailure());
     });
 };

@@ -8,8 +8,9 @@ import {
   writePost,
   modifyPost,
 } from '../api';
+import { popupThunk } from '../reducers/popup';
 
-const PostWriteForm = ({ match, userEmail, post }) => {
+const PostWriteForm = ({ match, userEmail, post, popupThunk }) => {
 
   const { postId } = match.params;
   const [categoryList, setCategoryList] = useState([]);
@@ -58,15 +59,15 @@ const PostWriteForm = ({ match, userEmail, post }) => {
   };
   const validateForm = () => {
     if (!form.categoryId) {
-      alert('카테고리를 선택해주세요.');
+      popupThunk({ message: '카테고리를 선택해주세요.' });
       return false;
     }
     if (!form.title) {
-      alert('제목을 입력해주세요.');
+      popupThunk({ message: '제목을 입력해주세요.' });
       return false;
     }
     if (!form.content) {
-      alert('내용을 입력해주세요.');
+      popupThunk({ message: '내용을 입력해주세요.' });
       return false;
     }
     return true;
@@ -74,7 +75,7 @@ const PostWriteForm = ({ match, userEmail, post }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let result = validateForm();
+    const result = validateForm();
     if (!result) return;
     let promise;
     if (postId) {
@@ -89,7 +90,7 @@ const PostWriteForm = ({ match, userEmail, post }) => {
       .then((post) => {
         history.push(`/${post.category.path}/${post.id}`);
       })
-      .catch(() => alert('error'));
+      .catch((err) => popupThunk({ message: err }));
   };
 
   return (
@@ -154,4 +155,8 @@ const mapStateToProps = (state) => ({
   post: state.post.post,
 });
 
-export default connect(mapStateToProps)(PostWriteForm);
+const mapDispatchToProp = (dispatch) => ({
+  popupThunk: (popup) => dispatch(popupThunk(popup)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProp)(PostWriteForm);

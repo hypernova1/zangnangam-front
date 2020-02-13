@@ -11,7 +11,7 @@ const FlashPopup = ({ message, visible }) => {
         setClosing(false);
       }, 1000);
     }
-  }, []);
+  }, [visible]);
 
   if (!visible && !closing) return null;
 

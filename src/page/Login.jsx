@@ -3,8 +3,9 @@ import './Login.css';
 import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { loginThunk } from '../reducers/auth';
+import { popupThunk } from '../reducers/popup';
 
-const Login = ({ loginThunk, isAuthenticated }) => {
+const Login = ({ loginThunk, isAuthenticated, popupThunk }) => {
 
   const history = useHistory();
   const location = useLocation();
@@ -32,7 +33,7 @@ const Login = ({ loginThunk, isAuthenticated }) => {
     if (result) {
       history.push(from.pathname);
     } else {
-      alert('계정 정보가 일치하지 않습니다.');
+      popupThunk({ message: '계정 정보가 일치하지 않습니다.' });
     }
   };
   return (
@@ -77,6 +78,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loginThunk: (email, password) => dispatch(loginThunk(email, password)),
+  popupThunk: (popup) => dispatch(popupThunk(popup)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
