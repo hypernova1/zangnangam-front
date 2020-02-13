@@ -5,6 +5,7 @@ export {
 export {
   getCategories,
   modifyCategory,
+  createCategory,
 } from './category';
 export {
   getPostDetail,

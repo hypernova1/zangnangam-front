@@ -16,3 +16,13 @@ export const modifyCategory = (category) => {
     },
   });
 };
+
+export const createCategory = (category) => {
+  return authAxios({
+    url: 'http://localhost:3300/category',
+    method: 'POST',
+    data: {
+      ...category,
+    },
+  });
+};

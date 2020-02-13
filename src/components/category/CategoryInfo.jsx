@@ -5,7 +5,9 @@ import { modifyCategory } from '../../api';
 import { updateCategory } from '../../reducers/category';
 import { popupThunk } from '../../reducers/popup';
 
-const CategoryInfo = ({ category, setCategory, updateCategory, popupThunk }) => {
+const CategoryInfo = ({
+  category, mode, setMode, setCategory, updateCategory, popupThunk, cancelCategoryForm, registerCategory,
+}) => {
 
   const handleChange = (e) => {
     setCategory({
@@ -14,16 +16,12 @@ const CategoryInfo = ({ category, setCategory, updateCategory, popupThunk }) => 
     });
   };
 
-  const showWarning = (message) => {
-    popupThunk({ message });
-  };
-
   const handleClick = () => {
     modifyCategory(category)
       .then((res) => res.data)
       .then((data) => {
         updateCategory(data);
-        showWarning('카테고리가 업데이트 되었습니다.');
+        popupThunk({ message: '카테고리가 업데이트 되었습니다.' });
       });
   };
 
@@ -39,7 +37,31 @@ const CategoryInfo = ({ category, setCategory, updateCategory, popupThunk }) => 
         <option value="admin">관리자</option>
       </select>
       <div className="CategoryModifyButtonWrap">
-        <button type="button" onClick={handleClick}>수정</button>
+        {
+          !category.isWrite || mode === 'update' ? (
+            <button type="button" onClick={handleClick}>수정</button>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  registerCategory(category);
+                }}
+              >
+                등록
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  cancelCategoryForm();
+                  setMode('update');
+                }}
+              >
+                취소
+              </button>
+            </>
+          )
+        }
       </div>
     </div>
   );

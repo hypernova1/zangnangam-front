@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import dompurify from 'dompurify';
 import './Comment.css';
 
 const Comment = ({ comment, postId, userEmail, onClickModifyComment, onClickRemoveComment }) => {
@@ -7,6 +8,7 @@ const Comment = ({ comment, postId, userEmail, onClickModifyComment, onClickRemo
   const [commentData, setCommentData] = useState({
     ...comment,
   });
+  const sanitizer = dompurify.sanitize;
 
   const handleModify = () => {
     setModifyState(!modifyState);
@@ -79,7 +81,7 @@ const Comment = ({ comment, postId, userEmail, onClickModifyComment, onClickRemo
               />
             </div>
           ) : (
-            <div>{ commentData.content }</div>
+            <div dangerouslySetInnerHTML={{'__html': sanitizer(commentData.content.split('\n').join('<br>')) }} />
           )
         }
       </div>

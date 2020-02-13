@@ -34,10 +34,6 @@ const PostDetail = ({ match, userEmail, savePost, popupThunk }) => {
       });
   }, [categoryPath, postId]);
 
-  const createMarkUp = () => ({
-    __html: post.content,
-  });
-
   const modifyPost = () => {
     savePost(post);
     history.push(`/${categoryPath}/modify/${post.id}`);
@@ -88,7 +84,9 @@ const PostDetail = ({ match, userEmail, savePost, popupThunk }) => {
       <div className="PostBody">
         <div
           className="PostContent"
-          dangerouslySetInnerHTML={createMarkUp()}
+          dangerouslySetInnerHTML={{
+            '__html': post.content,
+          }}
         />
       </div>
       <div className="CommentInfo">
