@@ -1,14 +1,14 @@
 const EXECUTE_POPUP = 'popup/EXECUTE_POPUP';
 const CLOSE_POPUP = 'popup/CLOSE_POPUP';
 
-const executePopup = (popup) => ({
+export const executePopup = (popup) => ({
   type: EXECUTE_POPUP,
   payload: {
     ...popup,
   },
 });
 
-const closePopup = () => ({
+export const closePopup = () => ({
   type: CLOSE_POPUP,
 });
 
@@ -26,17 +26,20 @@ export const popupThunk = (state) => (dispatch) => {
 const initState = {
   visible: false,
   message: '',
+  result: '',
 };
 
 export default function reducer(state = initState, action) {
   switch (action.type) {
     case EXECUTE_POPUP:
       return {
+        ...state,
         visible: true,
         message: action.payload.message,
       };
     case CLOSE_POPUP:
       return {
+        ...state,
         visible: false,
         message: '',
       };

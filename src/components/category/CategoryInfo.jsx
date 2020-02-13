@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import './CategoryInfo.css';
 import { modifyCategory } from '../../api';
@@ -8,7 +8,6 @@ import { popupThunk } from '../../reducers/popup';
 const CategoryInfo = ({
   category, mode, setMode, setCategory, updateCategory, popupThunk, cancelCategoryForm, registerCategory,
 }) => {
-
   const handleChange = (e) => {
     setCategory({
       ...category,

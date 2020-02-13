@@ -1,4 +1,5 @@
 import authAxios from './authAxios';
+import category from '../reducers/category';
 
 export const getCategories = () => {
   return authAxios({
@@ -24,5 +25,12 @@ export const createCategory = (category) => {
     data: {
       ...category,
     },
+  });
+};
+
+export const removeCategory = (category) => {
+  return authAxios({
+    url: `http://localhost:3300/category/${category.id}`,
+    method: 'DELETE',
   });
 };

@@ -1,11 +1,6 @@
 import * as api from '../api';
 
-const GET_CATEGORY = 'category/GET_CATEGORY';
 const UPDATE_CATEGORY = 'category/UPDATE_CATEGORY';
-
-export const getCategory = () => ({
-  type: GET_CATEGORY,
-});
 
 export const updateCategory = (categories) => ({
   type: UPDATE_CATEGORY,
@@ -27,8 +22,6 @@ const initialState = [];
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case GET_CATEGORY:
-      return state;
     case UPDATE_CATEGORY:
       return [
         ...action.payload.categories,

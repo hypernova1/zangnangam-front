@@ -13,6 +13,7 @@ import CategoryInfo from './category/CategoryInfo';
 
 import PrivateRoute from './util/PrivateRoute';
 import FlashPopup from './util/FlashPopup';
+import ConfirmModal from './util/ConfirmModal';
 
 export {
   Comment,
@@ -25,5 +26,6 @@ export {
   PrivateRoute,
   FlashPopup,
   CategoryItem,
-  CategoryInfo
+  CategoryInfo,
+  ConfirmModal,
 };

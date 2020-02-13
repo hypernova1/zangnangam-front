@@ -1,0 +1,40 @@
+.ConfirmModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: auto;
+    display: none;
+}
+
+.Visible {
+    display: block;
+}
+
+.ConfirmModal .ModalContent {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 3rem;
+    width: 15rem;
+    height: 7rem;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.ConfirmModal .ModalButtonWrap {
+    margin-top: 3rem;
+}
+
+.ConfirmModal .ModalButtonWrap > button {
+    all: unset;
+    margin: 1rem;
+    background-color: #dcdde1;
+    color: #7f8c8d;
+    padding: 0.5rem 0.7rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}

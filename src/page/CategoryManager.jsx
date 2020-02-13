@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { CategoryItem, CategoryInfo } from '../components';
 import { updateCategory } from '../reducers/category';
-import { getCategories, createCategory } from '../api';
+import { createCategory, removeCategory } from '../api';
 import { popupThunk } from '../reducers/popup';
+import { openModal } from '../reducers/modal';
 import './CategoryManager.css';
 
-const CategoryManager = ({ categories, updateCategory, popupThunk }) => {
-  const [categoryList, setCategoryList] = useState(categories);
+const CategoryManager = ({ categories, updateCategory, popupThunk, openModal }) => {
+  const [categoryList, setCategoryList] = useState([]);
   const [activeCategory, setActiveCategory] = useState(categories[0]);
   const [mode, setMode] = useState('update');
 
   useEffect(() => {
-    getCategories()
-      .then((res) => res.data)
-      .then((data) => {
-        updateCategory(data);
-      });
-  }, []);
+    setCategoryList(categories);
+  }, [categories]);
 
   const viewCategoryInfo = (id) => {
     setActiveCategory(categoryList[id]);
@@ -54,9 +51,27 @@ const CategoryManager = ({ categories, updateCategory, popupThunk }) => {
     createCategory(category)
       .then((res) => res.data)
       .then((data) => {
-        console.log(data);
+        popupThunk({ message: '메뉴 등록이 완료되었습니다.' });
         updateCategory(data);
       });
+  };
+
+  const deleteCategory = () => {
+    if (activeCategory.isWrite) {
+      popupThunk({ message: '등록 중인 메뉴는 삭제할 수 없습니다.' });
+      return;
+    }
+    openModal({
+      message: '정말 삭제하시겠습니까?',
+      func: () => {
+        removeCategory(activeCategory)
+          .then((res) => res.data)
+          .then((data) => {
+            popupThunk({ message: '메뉴가 삭제되었습니다.' });
+            updateCategory(data);
+          });
+      },
+    });
   };
 
   return (
@@ -65,7 +80,7 @@ const CategoryManager = ({ categories, updateCategory, popupThunk }) => {
       <div className="CategoryManager">
         <div className="CategoryListWrap">
           <button type="button" className="CategoryCreateButton" onClick={createCategoryForm}>+</button>
-          <button type="button" className="CategoryRemoveButton">-</button>
+          <button type="button" className="CategoryRemoveButton" onClick={deleteCategory}>-</button>
           <ul className="CategoryList">
             {
               categoryList && categoryList.map((category, index) => (
@@ -100,6 +115,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   updateCategory: (categories) => dispatch(updateCategory(categories)),
   popupThunk: (popup) => dispatch(popupThunk(popup)),
+  openModal: (modal) => dispatch(openModal(modal)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryManager);
