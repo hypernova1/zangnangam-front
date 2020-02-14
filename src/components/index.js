@@ -9,7 +9,7 @@ import Navigator from './include/Navigator';
 import Post from './post/Post';
 
 import CategoryItem from './category/CategoryItem';
-import CategoryInfo from './category/CategoryInfo';
+import CategoryForm from './category/CategoryForm';
 
 import PrivateRoute from './util/PrivateRoute';
 import FlashPopup from './util/FlashPopup';
@@ -26,6 +26,6 @@ export {
   PrivateRoute,
   FlashPopup,
   CategoryItem,
-  CategoryInfo,
+  CategoryForm,
   ConfirmModal,
 };

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import { CategoryItem, CategoryInfo } from '../components';
+import { CategoryItem, CategoryForm } from '../components';
 import { updateCategory } from '../reducers/category';
 import { createCategory, removeCategory } from '../api';
 import { popupThunk } from '../reducers/popup';
@@ -96,7 +96,7 @@ const CategoryManager = ({ categories, updateCategory, popupThunk, openModal }) 
             }
           </ul>
         </div>
-        <CategoryInfo
+        <CategoryForm
           category={activeCategory}
           setCategory={setActiveCategory}
           cancelCategoryForm={cancelCategoryForm}

@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './CategoryInfo.css';
+import './CategoryForm.css';
 import { modifyCategory } from '../../api';
 import { updateCategory } from '../../reducers/category';
 import { popupThunk } from '../../reducers/popup';
 
-const CategoryInfo = ({
-  category, mode, setMode, setCategory, updateCategory, popupThunk, cancelCategoryForm, registerCategory,
+const CategoryForm = ({
+  category, mode, setMode, setCategory, updateCategory,
+  popupThunk, cancelCategoryForm, registerCategory,
 }) => {
   const handleChange = (e) => {
     setCategory({
@@ -25,12 +26,12 @@ const CategoryInfo = ({
   };
 
   return (
-    <div className="CategoryInfo">
-      <div className="CategoryInfoLabel">Name</div>
+    <div className="CategoryForm">
+      <div className="CategoryFormLabel">Name</div>
       <input type="text" name="name" value={category.name} onChange={handleChange} />
-      <div className="CategoryInfoLabel">Path</div>
+      <div className="CategoryFormLabel">Path</div>
       <input type="text" name="path" value={category.path} onChange={handleChange} />
-      <div className="CategoryInfoLabel">Role</div>
+      <div className="CategoryFormLabel">Role</div>
       <select name="role" value={category.role} onChange={handleChange}>
         <option value="all">모든 사람</option>
         <option value="admin">관리자</option>
@@ -71,4 +72,4 @@ const mapDispatchToProps = (dispatch) => ({
   popupThunk: (popup) => dispatch(popupThunk(popup)),
 });
 
-export default connect(null, mapDispatchToProps)(CategoryInfo);
+export default connect(null, mapDispatchToProps)(CategoryForm);
