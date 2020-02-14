@@ -45,6 +45,7 @@ const CategoryManager = ({ categories, updateCategory, popupThunk, openModal }) 
 
   const cancelCategoryForm = () => {
     setCategoryList(categoryList.slice(0, -1));
+    setActiveCategory(categoryList[0]);
   };
 
   const registerCategory = (category) => {

@@ -19,10 +19,7 @@ const App = ({
   isAuthenticated, saveUserSummary, loginFailure, categories, categoryThunk,
 }) => {
   useEffect(() => {
-    if (!categories.length) {
-      categoryThunk();
-    }
-
+    categoryThunk();
     if (isAuthenticated) {
       getUserSummary()
         .then((res) => res.data)
