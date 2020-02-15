@@ -3,11 +3,6 @@ import { NavLink } from 'react-router-dom';
 import './Post.css';
 
 const Post = ({ item, categoryPath }) => {
-  console.log(new Date().toISOString());
-  const setCreatedDate = () => {
-    const now = new Date();
-    console.log(now);
-  };
   return (
     <article
       className="PostWrapper"

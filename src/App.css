@@ -8,8 +8,11 @@
     box-sizing: border-box;
     min-height: 100%;
 }
-.MainContent {
+.ContentWrap {
     margin-left: 18rem;
 }
 
+.MainContent {
+    min-height: 800px;
+}
 

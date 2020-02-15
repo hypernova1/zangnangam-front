@@ -38,24 +38,26 @@ const App = ({
       <Router className="MainTemplate">
         <Navigator categories={categories} />
         <Header />
-        <section className="MainContent">
-          <Switch>
-            <Route exact path="/notfound" component={NotFound} />
-            <Route exact path="/category/manage" component={CategoryManager} />
-            <Route exact path="/" component={Main} />
-            <Route path="/login" component={Login} />
-            <PrivateRoute
-              path="/write"
-              component={PostWriteForm}
-            />
-            <PrivateRoute
-              path="/:categoryPath/modify/:postId"
-              component={PostWriteForm}
-            />
-            <Route exact path="/:categoryPath" component={PostList} />
-            <Route exact path="/:categoryPath/:postId" component={PostDetail} />
-            <Route component={NotFound} />
-          </Switch>
+        <section className="ContentWrap">
+          <div className="MainContent">
+            <Switch>
+              <Route exact path="/notfound" component={NotFound} />
+              <Route exact path="/category/manage" component={CategoryManager} />
+              <Route exact path="/" component={Main} />
+              <Route path="/login" component={Login} />
+              <PrivateRoute
+                path="/write"
+                component={PostWriteForm}
+              />
+              <PrivateRoute
+                path="/:categoryPath/modify/:postId"
+                component={PostWriteForm}
+              />
+              <Route exact path="/:categoryPath" component={PostList} />
+              <Route exact path="/:categoryPath/:postId" component={PostDetail} />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
           <Footer />
         </section>
       </Router>

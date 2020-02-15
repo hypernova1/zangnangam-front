@@ -61,13 +61,18 @@ const PostList = ({ match, isAuthenticated }) => {
         <h2 className="CategoryName">{ categoryName }</h2>
       </div>
       {
-        postList.map((item) => (
-          <Post
-            categoryPath={categoryPath}
-            item={item}
-            key={item.id}
-          />
-        ))
+        postList.length ? (
+          postList.map((item) => (
+            <Post
+              categoryPath={categoryPath}
+              item={item}
+              key={item.id}
+            />
+          ))
+        ) : (
+          <div className="PostNotFound">글이 존재하지 않습니다.</div>
+        )
+
       }
       {
         next && (

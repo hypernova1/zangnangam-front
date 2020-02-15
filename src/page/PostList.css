@@ -31,3 +31,9 @@
 .PostList .WriteButton {
     all: unset;
 }
+
+.PostNotFound {
+    margin-top: 3rem;
+    text-align: center;
+    font-style: italic;
+}
