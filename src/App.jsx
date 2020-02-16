@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  BrowserRouter as Router, Switch, Route,
+  Switch, Route, useLocation,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -18,7 +18,19 @@ import { categoryThunk } from './reducers/category';
 const App = ({
   isAuthenticated, saveUserSummary, loginFailure, categories, categoryThunk,
 }) => {
+  const { pathname } = useLocation();
   useEffect(() => {
+    try {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    } catch (err) {
+      console.log(err);
+      window.scrollTo(0, 0);
+    }
+
     categoryThunk();
     if (isAuthenticated) {
       getUserSummary()
@@ -31,36 +43,34 @@ const App = ({
           loginFailure();
         });
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, pathname]);
 
   return (
     <>
-      <Router className="MainTemplate">
-        <Navigator categories={categories} />
-        <Header />
-        <section className="ContentWrap">
-          <div className="MainContent">
-            <Switch>
-              <Route exact path="/notfound" component={NotFound} />
-              <Route exact path="/category/manage" component={CategoryManager} />
-              <Route exact path="/" component={Main} />
-              <Route path="/login" component={Login} />
-              <PrivateRoute
-                path="/write"
-                component={PostWriteForm}
-              />
-              <PrivateRoute
-                path="/:categoryPath/modify/:postId"
-                component={PostWriteForm}
-              />
-              <Route exact path="/:categoryPath" component={PostList} />
-              <Route exact path="/:categoryPath/:postId" component={PostDetail} />
-              <Route component={NotFound} />
-            </Switch>
-          </div>
-          <Footer />
-        </section>
-      </Router>
+      <Navigator categories={categories} />
+      <Header />
+      <section className="ContentWrap">
+        <div className="MainContent">
+          <Switch>
+            <Route exact path="/notfound" component={NotFound} />
+            <Route exact path="/category/manage" component={CategoryManager} />
+            <Route exact path="/" component={Main} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute
+              path="/write"
+              component={PostWriteForm}
+            />
+            <PrivateRoute
+              path="/:categoryPath/modify/:postId"
+              component={PostWriteForm}
+            />
+            <Route exact path="/:categoryPath" component={PostList} />
+            <Route exact path="/:categoryPath/:postId" component={PostDetail} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+        <Footer />
+      </section>
       <FlashPopup />
       <ConfirmModal />
     </>
