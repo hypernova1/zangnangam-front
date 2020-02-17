@@ -24,6 +24,7 @@ const PostWriteForm = ({ match, userEmail, post, popupThunk }) => {
   const history = useHistory();
 
   useEffect(() => {
+    console.log(post);
     getCategories()
       .then((res) => res.data)
       .then((data) => {

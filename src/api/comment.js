@@ -2,7 +2,7 @@ import authAxios from './authAxios';
 
 export const writeComment = (form) => {
   return authAxios({
-    url: 'http://localhost:3300/comment',
+    url: '/comment',
     method: 'POST',
     data: {
       ...form,
@@ -12,7 +12,7 @@ export const writeComment = (form) => {
 
 export const modifyComment = (comment) => {
   return authAxios({
-    url: `http://localhost:3300/comment/${comment.id}`,
+    url: `/comment/${comment.id}`,
     method: 'PUT',
     data: {
       ...comment,
@@ -22,7 +22,7 @@ export const modifyComment = (comment) => {
 
 export const removeComment = (commentId, postId) => {
   return authAxios({
-    url: `http://localhost:3300/comment/${commentId}`,
+    url: `/comment/${commentId}`,
     method: 'DELETE',
     data: {
       postId,
