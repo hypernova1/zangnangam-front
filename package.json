@@ -9,6 +9,7 @@
     "@tinymce/tinymce-react": "^3.4.0",
     "axios": "^0.19.1",
     "dompurify": "^2.0.8",
+    "http-proxy-middleware": "^1.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -50,5 +51,6 @@
     "eslint-plugin-react": "^7.18.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "react-hot-loader": "^4.5.3"
-  }
+  },
+  "proxy": "https://localhost:8080"
 }

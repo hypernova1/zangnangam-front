@@ -2,21 +2,21 @@ import authAxios from './authAxios';
 
 export const getPostList = (categoryPath, page) => {
   return authAxios({
-    url: `http://localhost:3300/post/${categoryPath}?page=${page}`,
+    url: `/post/${categoryPath}?page=${page}`,
     method: 'GET',
   });
 };
 
 export const getPostDetail = (categoryPath, postId) => {
   return authAxios({
-    url: `http://localhost:3300/post/${categoryPath}/${postId}`,
+    url: `/post/${categoryPath}/${postId}`,
     method: 'GET',
   });
 };
 
 export const writePost = (post) => {
   return authAxios({
-    url: 'http://localhost:3300/post',
+    url: '/post',
     method: 'POST',
     data: {
       ...post,
@@ -26,7 +26,7 @@ export const writePost = (post) => {
 
 export const modifyPost = (post, postId) => {
   return authAxios({
-    url: `http://localhost:3300/post/${postId}`,
+    url: `/post/${postId}`,
     method: 'PUT',
     data: {
       ...post,
@@ -36,7 +36,7 @@ export const modifyPost = (post, postId) => {
 
 export const removePost = (postId, categoryPath) => {
   return authAxios({
-    url: `http://localhost:3300/post/${postId}?categoryPath=${categoryPath}`,
+    url: `/post/${postId}?categoryPath=${categoryPath}`,
     method: 'DELETE',
   });
 };
