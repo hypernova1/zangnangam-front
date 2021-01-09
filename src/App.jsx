@@ -11,13 +11,7 @@ import {
 } from './page';
 import './App.css';
 
-import { getUserSummary } from './api';
-import { saveUserSummary, loginFailure } from './reducers/auth';
-import { categoryThunk } from './reducers/category';
-
-const App = ({
-  isAuthenticated, saveUserSummary, loginFailure, categories, categoryThunk,
-}) => {
+const App = ({ categories }) => {
   const { pathname } = useLocation();
   useEffect(() => {
     try {
@@ -27,23 +21,9 @@ const App = ({
         behavior: 'smooth',
       });
     } catch (err) {
-      console.log(err);
       window.scrollTo(0, 0);
     }
-
-    categoryThunk();
-    if (isAuthenticated) {
-      getUserSummary()
-        .then((res) => res.data)
-        .then((data) => {
-          saveUserSummary(data);
-        })
-        .catch((err) => {
-          console.error(err);
-          loginFailure();
-        });
-    }
-  }, [isAuthenticated, pathname]);
+  }, [pathname]);
 
   return (
     <>
@@ -78,15 +58,8 @@ const App = ({
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  userSummary: state.auth.userSummary,
   categories: state.category,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  saveUserSummary: (userSummary) => dispatch(saveUserSummary(userSummary)),
-  loginFailure: () => dispatch(loginFailure()),
-  categoryThunk: () => dispatch(categoryThunk()),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

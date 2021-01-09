@@ -10,7 +10,7 @@ export const getCategories = () => {
 
 export const modifyCategory = (category) => {
   return authAxios({
-    url: `http://localhost:3300/category/${category.id}`,
+    url: `/category/${category.id}`,
     method: 'PUT',
     data: {
       ...category,
